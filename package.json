@@ -1,0 +1,25 @@
+{
+  "name": "senpexscrape",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanmodd/senpexscrape.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seanmodd/senpexscrape/issues"
+  },
+  "homepage": "https://github.com/seanmodd/senpexscrape#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "puppeteer": "^5.5.0",
+    "python-shell": "^2.0.3"
+  }
+}
