@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/seanmodd/senpexscrape#readme",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.5",
     "dotenv": "^8.2.0",
+    "mongoose": "^5.11.11",
     "puppeteer": "^5.5.0",
     "python-shell": "^2.0.3"
   }
