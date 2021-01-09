@@ -23,6 +23,8 @@
     "google-spreadsheet": "^3.1.15",
     "mongoose": "^5.11.11",
     "puppeteer": "^5.5.0",
-    "python-shell": "^2.0.3"
+    "python-shell": "^2.0.3",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6"
   }
 }
