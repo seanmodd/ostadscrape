@@ -2,12 +2,14 @@ require('dotenv').config();
 const { PythonShell } = require('python-shell');
 const puppeteer = require('puppeteer');
 const path = require('path');
+const fs = require('fs');
 
 //1st async function
 //Using Puppeteer to launch chromium browser!
 (async () => {
   const browser = await puppeteer.launch({
     headless: false,
+    defaultViewport: null,
   });
   const page = await browser.newPage();
   await page.goto('https://senpex.com/admin.php');
@@ -41,6 +43,57 @@ const path = require('path');
   await page.type('#txtCaptcha', res);
 
   await page.click('#btnLogin');
+
+  await page.goto('https://senpex.com/index.php?module=cms_json_log&mid=25');
+
+  const max = 20;
+  var iteration = 1;
+
+  var resData = [];
+
+  while (true) {
+    let data = await page.$$eval('#table-3 tr', (rows) => {
+      return Array.from(rows, (row) => {
+        const cols = row.querySelectorAll('td');
+        return Array.from(cols, (col) => {
+          if (col.querySelector('textarea')) {
+            return ''; //col.querySelector('textarea').value;
+          }
+          return col.innerText.trim() ? col.innerText : 'sean-00000000---empty';
+        });
+      });
+    });
+
+    // console.log(JSON.stringify(data));
+    resData.push(data);
+    //get next page
+
+    console.log('log data', iteration);
+
+    // console.log(`//a[text()='${iteration}']`);
+    const [element] = await page.$x(`(//a[text()='${iteration}'])[1]`);
+
+    // console.log(element);
+    const next = await page.evaluateHandle(
+      (e) => e.parentNode.nextSibling,
+      element
+    );
+
+    await next.click();
+
+    await page.waitForTimeout(2000);
+    if (iteration > max) break;
+    iteration++;
+    // document.querySelectorAll(".pagination li:not(.active)")
+    //scrap page
+
+    ///add some code to go to next page if it availabe of not break
+    // break;
+  }
+
+  resData = JSON.stringify(resData);
+  fs.writeFileSync('result.json', resData);
+
   //   await browser.close();
   /*
 THIS IS WHERE YOU CLICK ON THE MENU BUTTON AND THEN THE SENDERS BUTTON AND START SCRAPING
@@ -86,4 +139,3 @@ async function solve(captcha) {
     });
   });
 }
-
