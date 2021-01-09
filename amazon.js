@@ -9,17 +9,20 @@ const url =
   'https://www.amazon.com/Sony-Noise-Cancelling-Headphones-WH1000XM3/dp/B07G4MNFS1';
 
 async function configureBrowser() {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
   await page.goto(url);
   return page;
 }
 
-async function checkprice() {
+async function checkprice(page) {
   await page.reload();
   let html = await page.evaluate(() => document.body.innerHTML);
-  console.log(html);
-  //priceblock_dealprice
+  // console.log(html);
+  $('#priceblock_ourprice', html).each(function () {
+    let dollarPrice = $(this).text();
+    console.log(dollarPrice);
+  });
 }
 
 async function monitor() {
