@@ -46,50 +46,44 @@ const path = require('path');
 THIS IS WHERE YOU CLICK ON THE MENU BUTTON AND THEN THE SENDERS BUTTON AND START SCRAPING
   */
 
-
-//Show this to Omid... why isn't it working??
-// async () => {
-//   const menuBtn = await page.$x('/html/body/div[1]/div/a');
-//   menuBtn.click();
-//   const sendersBtn = await page.$x(
-//     '/html/body/div[3]/div[1]/div/ul/li[4]/ul/li[3]/a'
-//   );
-//   sendersBtn.click();
-// };
-// const newurl = 'https://senpex.com/index.php?module=clnt_senders&mid=32';
-//Here is another attempt:
-// async function run() {
-//     const browser = await puppeteer.launch({
-//     headless: false,
-//   });
-//   const page = await browser.newPage();
-//   const menuBtn = await page.$x('/html/body/div[1]/div/a');
-//   menuBtn.click();
-// }
-
-
-
-  await page.waitFor(3000);
-  await page.click('menu-toggler responsive-toggler');
+  //Show this to Omid... why isn't it working??
+  // async () => {
+  //   const menuBtn = await page.$x('/html/body/div[1]/div/a');
+  //   menuBtn.click();
+  //   const sendersBtn = await page.$x(
+  //     '/html/body/div[3]/div[1]/div/ul/li[4]/ul/li[3]/a'
+  //   );
+  //   sendersBtn.click();
+  // };
+  // const newurl = 'https://senpex.com/index.php?module=clnt_senders&mid=32';
+  //Here is another attempt:
+  // async function run() {
+  //     const browser = await puppeteer.launch({
+  //     headless: false,
+  //   });
+  //   const page = await browser.newPage();
+  //   const menuBtn = await page.$x('/html/body/div[1]/div/a');
+  //   menuBtn.click();
+  // }
 })();
 
-    //2nd async function
-    //The file titled './captch_resolver.py' will create a new file titled './captcha.png'
-    async function solve(captcha) {
-    return new Promise((resolve, reject) => {
-      var scriptPath = path.join(__dirname, './captcha_resolver.py');
-      let options = {
-        pythonPath: '/Users/seanmodd/opt/anaconda3/bin/python',
-        args: [captcha],
-      };
-      PythonShell.run(scriptPath, options, function (err, results) {
-        if (err) {
-          // fs.writeFileSync("omid-omid.html", data);
-          console.log(err);
-        }
-        if (err) reject('erorooooor');
-        else resolve(results[0]);
-      });
+//2nd async function
+//The file titled './captch_resolver.py' will create a new file titled './captcha.png'
+async function solve(captcha) {
+  return new Promise((resolve, reject) => {
+    var scriptPath = path.join(__dirname, './captcha_resolver.py');
+    let options = {
+      pythonPath: '/Users/seanmodd/opt/anaconda3/bin/python',
+      args: [captcha],
+    };
+    PythonShell.run(scriptPath, options, function (err, results) {
+      if (err) {
+        // fs.writeFileSync("omid-omid.html", data);
+        console.log(err);
+      }
+      if (err) reject('erorooooor');
+      else resolve(results[0]);
     });
-    }
+  });
+}
 
