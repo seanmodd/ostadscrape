@@ -3,6 +3,7 @@ const { PythonShell } = require('python-shell');
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
+const Sheet = require('./sheet');
 
 //1st async function
 //Using Puppeteer to launch chromium browser!
@@ -95,6 +96,10 @@ const fs = require('fs');
   resData = JSON.stringify(resData);
   fs.writeFileSync('result.json', resData);
 
+  const sheet = new Sheet();
+  await sheet.load();
+  const sheetIndex = await sheet.addSheet(title.slice(0, 99), ['points', 'text']);
+  sheet.addRows(resData, sheetIndex);
 
   //   await browser.close();
   /*
