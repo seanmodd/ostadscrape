@@ -36,6 +36,11 @@ const Sheet = require('./sheet');
       height: rect.bottom - rect.top,
     },
   });
+  /*
+  Testing sheets google...
+  */
+  const sheet = new Sheet();
+  await sheet.load();
 
   //Still 1st async function continued...
   //The Await Promise function to set in place the callback to solve Captcha...
@@ -96,15 +101,13 @@ const Sheet = require('./sheet');
   resData = JSON.stringify(resData);
   fs.writeFileSync('result.json', resData);
 
-  const sheet = new Sheet();
-  await sheet.load();
-  const sheetIndex = await sheet.addSheet(`nice`);
-  await sheet.addRows(resData, sheetIndex);
-
   //   await browser.close();
   /*
-THIS IS WHERE YOU CLICK ON THE MENU BUTTON AND THEN THE SENDERS BUTTON AND START SCRAPING
+This is sheets Google!
   */
+  const sheetIndex = await sheet.addSheet();
+  await sheet.getRows(0).map((row) => row.resData);
+  await sheet.addRows(resData, sheetIndex);
 
   //Show this to Omid... why isn't it working??
   // async () => {
