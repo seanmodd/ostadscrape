@@ -46,7 +46,7 @@ const fs = require('fs');
 
   await page.goto('https://senpex.com/index.php?module=cms_json_log&mid=25');
 
-  const max = 1;
+  const max = 10;
   var iteration = 1;
 
   var resData = [];
@@ -69,6 +69,7 @@ const fs = require('fs');
     //get next page
 
     console.log('log data', iteration);
+    console.log(resData)
 
     // console.log(`//a[text()='${iteration}']`);
     const [element] = await page.$x(`(//a[text()='${iteration}'])[1]`);
@@ -93,7 +94,7 @@ const fs = require('fs');
 
   resData = JSON.stringify(resData);
   fs.writeFileSync('result.json', resData);
-  console.log(resData)
+
 
   //   await browser.close();
   /*
