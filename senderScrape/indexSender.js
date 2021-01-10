@@ -70,7 +70,7 @@ const Sheet = require('./sheet');
     //get next page
 
     console.log('log data', iteration);
-    console.log(resData)
+    console.log(resData);
 
     // console.log(`//a[text()='${iteration}']`);
     const [element] = await page.$x(`(//a[text()='${iteration}'])[1]`);
@@ -98,8 +98,8 @@ const Sheet = require('./sheet');
 
   const sheet = new Sheet();
   await sheet.load();
-  const sheetIndex = await sheet.addSheet(title.slice(0, 99), ['points', 'text']);
-  sheet.addRows(resData, sheetIndex);
+  const sheetIndex = await sheet.addSheet(`nice`);
+  await sheet.addRows(resData, sheetIndex);
 
   //   await browser.close();
   /*
