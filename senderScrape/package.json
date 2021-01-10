@@ -1,0 +1,22 @@
+{
+  "name": "senderScrape",
+  "version": "1.0.0",
+  "description": "",
+  "main": "indexSender.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.5",
+    "dotenv": "^8.2.0",
+    "google-spreadsheet": "^3.1.15",
+    "mongoose": "^5.11.11",
+    "nodemailer": "^6.4.17",
+    "python-shell": "^2.0.3",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6"
+  }
+}
