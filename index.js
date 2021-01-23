@@ -38,7 +38,7 @@ const Sheet = require('./sheet');
   });
 
   //Still 1st async function continued...
-  //The Await Promise function to set in place the callback to solve Captcha...
+  //The Await Promise function to set in place the callback to solve Captcha
   //Ask Omid why this 'await solve('captcha.png') is allowed to turn into the 2nd async function below, the one with 'async function solve(captcha)'... how is this even possible? it's confusing... and there seems to be nested Promises? Isn't this just callback hell?
   const res = await solve('captcha.png');
   await page.type('#txtCaptcha', res);
@@ -70,7 +70,7 @@ const Sheet = require('./sheet');
     //get next page
 
     console.log('log data', iteration);
-    console.log(resData)
+    console.log(resData);
 
     // console.log(`//a[text()='${iteration}']`);
     const [element] = await page.$x(`(//a[text()='${iteration}'])[1]`);
@@ -98,7 +98,10 @@ const Sheet = require('./sheet');
 
   const sheet = new Sheet();
   await sheet.load();
-  const sheetIndex = await sheet.addSheet(title.slice(0, 99), ['points', 'text']);
+  const sheetIndex = await sheet.addSheet(title.slice(0, 99), [
+    'points',
+    'text',
+  ]);
   sheet.addRows(resData, sheetIndex);
 
   //   await browser.close();
