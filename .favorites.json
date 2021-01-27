@@ -1,0 +1,20 @@
+[
+    {
+        "type": "Group",
+        "name": "snippets",
+        "parent_id": null,
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "rYpwWqg60fJOkFUm",
+        "iconColor": "rgb(255, 0, 255)"
+    },
+    {
+        "type": "Directory",
+        "name": "/Users/seanmodd/Library/Application Support/Code/User/snippets",
+        "parent_id": "rYpwWqg60fJOkFUm",
+        "fsPath": "/Users/seanmodd/Library/Application Support/Code/User/snippets",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "2zDv4YmiaEVAHUwj"
+    }
+]
