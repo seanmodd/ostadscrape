@@ -47,7 +47,7 @@ const Sheet = require('./sheet');
 
   await page.goto('https://senpex.com/index.php?module=cms_json_log&mid=25');
 
-  const max = 10;
+  const max = 1;
   var iteration = 1;
 
   var resData = [];
