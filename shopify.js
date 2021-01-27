@@ -23,4 +23,4 @@ const puppeteer = require('puppeteer');
   } catch (e) {
     console.log('our error', e);
   }
-});
+})();
