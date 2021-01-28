@@ -45,9 +45,7 @@ const Sheet = require('./sheet');
 
   await page.click('#btnLogin');
 
-  //! •••••••••••••••••••••••••••••••make sure here we are scraping correctly now
-
-  await page.goto('https://senpex.com/index.php?module=clnt_packs&mid=37');
+  await page.goto('https://senpex.com/index.php?module=cms_json_log&mid=25');
 
   const max = 10;
   var iteration = 1;
@@ -59,7 +57,7 @@ const Sheet = require('./sheet');
       return Array.from(rows, (row) => {
         const cols = row.querySelectorAll('td');
         return Array.from(cols, (col) => {
-          if (cokl.querySelector('textarea')) {
+          if (col.querySelector('textarea')) {
             return ''; //col.querySelector('textarea').value;
           }
           return col.innerText.trim() ? col.innerText : 'sean-00000000---empty';
@@ -105,8 +103,32 @@ const Sheet = require('./sheet');
     'text',
   ]);
   sheet.addRows(resData, sheetIndex);
+
+  //   await browser.close();
+  /*
+THIS IS WHERE YOU CLICK ON THE MENU BUTTON AND THEN THE SENDERS BUTTON AND START SCRAPING
+  */
+
+  //Show this to Omid... why isn't it working??
+  // async () => {
+  //   const menuBtn = await page.$x('/html/body/div[1]/div/a');
+  //   menuBtn.click();
+  //   const sendersBtn = await page.$x(
+  //     '/html/body/div[3]/div[1]/div/ul/li[4]/ul/li[3]/a'
+  //   );
+  //   sendersBtn.click();
+  // };
+  // const newurl = 'https://senpex.com/index.php?module=clnt_senders&mid=32';
+  //Here is another attempt:
+  // async function run() {
+  //     const browser = await puppeteer.launch({
+  //     headless: false,
+  //   });
+  //   const page = await browser.newPage();
+  //   const menuBtn = await page.$x('/html/body/div[1]/div/a');
+  //   menuBtn.click();
+  // }
 })();
-//! ••••••••••••••••••••••••••••••• scraping here ends
 
 //2nd async function
 //The file titled './captch_resolver.py' will create a new file titled './captcha.png'
