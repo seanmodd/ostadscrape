@@ -4,111 +4,77 @@ const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
 const Sheet = require('./sheet');
+try {
+  (async () => {
+    const browser = await puppeteer.launch({
+      headless: true,
+      defaultViewport: null,
+    });
+    const page = await browser.newPage();
+    await page.goto('https://senpex.com/admin.php');
+    await page.type('#txtLogin', process.env.USERNAME);
+    await page.type('#txtPass', process.env.PASSWORD);
+    const element = await page.$('img[src="lib/captcha.php?id=loginpage"]');
+    const rect = await page.evaluate((ele) => {
+      const { top, left, bottom, right } = ele.getBoundingClientRect();
+      return { top, left, bottom, right };
+    }, element);
+    await page.screenshot({
+      path: 'captcha.png',
+      clip: {
+        x: rect.left,
+        y: rect.top,
+        width: rect.right - rect.left,
+        height: rect.bottom - rect.top,
+      },
+    });
+    const res = await solve('captcha.png');
+    await page.type('#txtCaptcha', res);
+    await page.click('#btnLogin');
 
-//1st async function
-//Using Puppeteer to launch chromium browser!
-(async () => {
-  const browser = await puppeteer.launch({
-    headless: false,
-    defaultViewport: null,
-  });
-  const page = await browser.newPage();
-  await page.goto('https://senpex.com/admin.php');
-  await page.type('#txtLogin', process.env.USERNAME);
-  await page.type('#txtPass', process.env.PASSWORD);
+    //! •••••••••••••••••••••••••••••••make sure here we are scraping correctly now
+    await page.goto('https://senpex.com/index.php?module=clnt_packs&mid=37');
+    const max = 10;
+    var iteration = 1;
+    var resData = [];
 
-  //Still 1st async function continued...
-  //Locating the captcha within the HTML...
-  const element = await page.$('img[src="lib/captcha.php?id=loginpage"]');
-  const rect = await page.evaluate((ele) => {
-    const { top, left, bottom, right } = ele.getBoundingClientRect();
-    return { top, left, bottom, right };
-  }, element);
-
-  //Still 1st async function continued...
-  //Taking screenshot of captcha to interpret it
-  await page.screenshot({
-    path: 'captcha.png',
-    clip: {
-      x: rect.left,
-      y: rect.top,
-      width: rect.right - rect.left,
-      height: rect.bottom - rect.top,
-    },
-  });
-
-  //Still 1st async function continued...
-  //The Await Promise function to set in place the callback to solve Captcha
-  //Ask Omid why this 'await solve('captcha.png') is allowed to turn into the 2nd async function below, the one with 'async function solve(captcha)'... how is this even possible? it's confusing... and there seems to be nested Promises? Isn't this just callback hell?
-  const res = await solve('captcha.png');
-  await page.type('#txtCaptcha', res);
-
-  await page.click('#btnLogin');
-
-  //! •••••••••••••••••••••••••••••••make sure here we are scraping correctly now
-
-  await page.goto('https://senpex.com/index.php?module=clnt_packs&mid=37');
-
-  const max = 10;
-  var iteration = 1;
-
-  var resData = [];
-
-  while (true) {
-    let data = await page.$$eval('#table-3 tr', (rows) => {
-      return Array.from(rows, (row) => {
-        const cols = row.querySelectorAll('td');
-        return Array.from(cols, (col) => {
-          if (cokl.querySelector('textarea')) {
-            return ''; //col.querySelector('textarea').value;
-          }
-          return col.innerText.trim() ? col.innerText : 'sean-00000000---empty';
+    while (true) {
+      let data = await page.$$eval('#table-3 tr', (rows) => {
+        return Array.from(rows, (row) => {
+          const cols = row.querySelectorAll('td');
+          return Array.from(cols, (col) => {
+            if (col.querySelector('textarea')) {
+              return ''; //col.querySelector('textarea').value;
+            }
+            return col.innerText.trim()
+              ? col.innerText
+              : 'sean-00000000---empty';
+          });
         });
       });
-    });
-
-    // console.log(JSON.stringify(data));
-    resData.push(data);
-    //get next page
-
-    console.log('log data', iteration);
-    console.log(resData);
-
-    // console.log(`//a[text()='${iteration}']`);
-    const [element] = await page.$x(`(//a[text()='${iteration}'])[1]`);
-
-    // console.log(element);
-    const next = await page.evaluateHandle(
-      (e) => e.parentNode.nextSibling,
-      element
-    );
-
-    await next.click();
-
-    await page.waitForTimeout(2000);
-    if (iteration > max) break;
-    iteration++;
-    // document.querySelectorAll(".pagination li:not(.active)")
-    //scrap page
-
-    ///add some code to go to next page if it availabe of not break
-    // break;
-  }
-
-  resData = JSON.stringify(resData);
-  fs.writeFileSync('result.json', resData);
-
-  const sheet = new Sheet();
-  await sheet.load();
-  const sheetIndex = await sheet.addSheet(title.slice(0, 99), [
-    'points',
-    'text',
-  ]);
-  sheet.addRows(resData, sheetIndex);
-})();
-//! ••••••••••••••••••••••••••••••• scraping here ends
-
-//2nd async function
+      resData.push(data);
+      console.log('log data', iteration);
+      console.log(resData);
+      // console.log(`//a[text()='${iteration}']`);
+      const [element] = await page.$x(`(//a[text()='${iteration}'])[1]`);
+      // console.log(element);
+      const next = await page.evaluateHandle(
+        (e) => e.parentNode.nextSibling,
+        element
+      );
+      await next.click();
+      await page.waitForTimeout(2000);
+      if (iteration > max) break;
+      iteration++;
+    }
+    resData = JSON.stringify(resData);
+    fs.appendFileSync('result.json', resData);
+  })();
+  //! ••••••••••••••••••••••••••••••• scraping here ends
+} catch (error) {
+  console.log('this is an error Sean');
+}
+console.log('Done before captcha Async');
 //The file titled './captch_resolver.py' will create a new file titled './captcha.png'
 async function solve(captcha) {
   return new Promise((resolve, reject) => {
@@ -127,3 +93,4 @@ async function solve(captcha) {
     });
   });
 }
+console.log('Done After captcha Async');

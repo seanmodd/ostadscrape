@@ -16,5 +16,22 @@
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "2zDv4YmiaEVAHUwj"
+    },
+    {
+        "type": "Group",
+        "name": "mongoDBsample",
+        "parent_id": null,
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "80qrWdNETGsAzmQc"
+    },
+    {
+        "type": "Directory",
+        "name": "/Users/seanmodd/Development/nodejsscraping_udemy",
+        "parent_id": "80qrWdNETGsAzmQc",
+        "fsPath": "/Users/seanmodd/Development/nodejsscraping_udemy",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "J5lxEAeVHLI9Tbkc"
     }
 ]
