@@ -3,7 +3,7 @@ const { PythonShell } = require('python-shell');
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
-const Sheet = require('./sheet');
+const Sheet = require('./odinproject/sheet');
 try {
   (async () => {
     const browser = await puppeteer.launch({

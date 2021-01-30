@@ -33,5 +33,23 @@
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "J5lxEAeVHLI9Tbkc"
+    },
+    {
+        "type": "Group",
+        "name": "shell-to-drive-Udemy",
+        "parent_id": null,
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "XWB2E7nclShzUwQ1",
+        "iconColor": "rgb(0, 255, 255)"
+    },
+    {
+        "type": "Directory",
+        "name": "/Users/seanmodd/Development/shell-to-driver-01-starting-code",
+        "parent_id": "XWB2E7nclShzUwQ1",
+        "fsPath": "/Users/seanmodd/Development/shell-to-driver-01-starting-code",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "LPKzWeqTF1o7yDQa"
     }
 ]

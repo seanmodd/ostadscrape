@@ -8,7 +8,7 @@ module.exports = class Sheet {
   }
 
   async load() {
-    await this.doc.useServiceAccountAuth(require('./credentials.json'));
+    await this.doc.useServiceAccountAuth(require('../credentials.json'));
     await this.doc.loadInfo();
   }
   //we will create a new sheet for every comment thread that we scrape!
