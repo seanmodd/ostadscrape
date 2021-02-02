@@ -30,7 +30,7 @@ const fs = require('fs');
   const res = await solve('captcha.png');
   await page.type('#txtCaptcha', res);
   await page.click('#btnLogin');
-  //! Below is where the scraping starts!!!!!!
+  //! ••••••••••••••••••••••••••••••••••• Below is where the scraping starts!! •••••••••••••••••••••••••••••••••••••••••
   await page.goto('https://senpex.com/index.php?module=clnt_packs&mid=37');
   const max = 1;
   var iteration = 1;
@@ -67,7 +67,7 @@ const fs = require('fs');
   resData = JSON.stringify(resData);
   fs.writeFileSync('result.json', resData);
 })();
-//! Scraping is done and below is captcha python code!!
+//! ••••••••••••••••••••••••••••••••••• Above is where the scraping ends!! •••••••••••••••••••••••••••••••••••••••••
 async function solve(captcha) {
   return new Promise((resolve, reject) => {
     var scriptPath = path.join(__dirname, './captcha_resolver.py');
