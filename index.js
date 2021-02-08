@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
+const { exit } = require('process');
 
 // Connection URL
 const url =
@@ -76,15 +77,15 @@ let doScrape = async (db) => {
 
           var result = {
             packId: cols[1],
-            type: cols[1],
-            title: cols[2],
-            pickupTime: cols[3],
-            pickupAddress: cols[4],
-            deliveryAddress: cols[5],
-            ownerName: cols[6],
-            courierName: cols[7],
-            packagePrice: cols[8],
-            packageStatus: cols[9],
+            type: cols[2],
+            title: cols[3],
+            pickupTime: cols[4],
+            pickupAddress: cols[5],
+            deliveryAddress: cols[6],
+            ownerName: cols[7],
+            courierName: cols[8],
+            packagePrice: cols[9],
+            packageStatus: cols[10],
           };
           return result;
         });
@@ -92,13 +93,17 @@ let doScrape = async (db) => {
 
       for (var i in data) {
         let res = data[i];
+
+        if (!res.packId) continue;
         console.log(res);
         const query = { packId: res.packId };
         // const query = { name: "Deli Llama" };
+
         const update = { $set: res };
         const options = { upsert: true };
         try {
           db.collection('orderspanel').updateOne(query, update, options);
+          exit();
         } catch (ex) {}
       }
       // console.log(data);
