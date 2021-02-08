@@ -1,4 +1,4 @@
 # senpexscrape
 # ostadscrape
 
-omid amirhosseini is an Ostad
+omid amirhosseini is an Ostad!
