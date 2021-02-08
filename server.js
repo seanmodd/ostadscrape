@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const sendEmail = require('./utils/sendEmail');
 
 app.use(express.urlencoded({ extended: false }));
 app.use('/public', express.static(path.join(__dirname, 'public')));
@@ -16,7 +17,23 @@ app.get('/sent', (req, res) => {
 
 app.post('/sendemail', (req, res) => {
   const { name, surname, email } = req.body;
-  
+
+  const from = 'seansmodd@gmail.com';
+  const to = 'sean@senpex.com';
+  const subject = 'New SendGrid Node FullStackJunkie Vid!';
+
+  const output = `
+  <p>You have a new Contact Request</p>
+  <h3>Contact Details</h3>
+  <ul>
+    <li>Name: ${name}</li>
+    <li>Surname: ${surname}</li>
+    <li>Email: ${email}</li>
+  </ul>
+  `;
+
+  sendEmail(to, from, subject, output);
+  res.redirect('/sent');
 });
 
 const PORT = process.env.PORT || 5000;
