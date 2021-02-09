@@ -41,7 +41,7 @@ body {
   border-radius: 8px;
 }
 
-.contact_form_submitBtn {
+.contact_form__submitBtn {
   display: block;
   width: 100%;
   font-size: 1.4rem;
@@ -55,7 +55,7 @@ body {
   cursor: pointer;
 }
 
-.contact_form_submitBtn:hover {
+.contact_form__submitBtn:hover {
   background: #e9e9e9;
   color: #333;
   border: 1px solid #333;
@@ -75,7 +75,7 @@ body {
   margin-bottom: 1rem;
 }
 
-.sent_pageBox_Link {
+.sent_pageBox__Link {
   text-decoration: none;
   text-align: center;
   display: block;

@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/sent', (req, res) => {
-  res.render('sender');
+  res.render('sent');
 });
 
 app.post('/sendemail', (req, res) => {

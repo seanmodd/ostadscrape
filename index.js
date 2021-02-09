@@ -7,6 +7,28 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 const { exit } = require('process');
 
+const nodemailer = require('nodemailer');
+const cron = require('cron');
+
+var job = new cron.CronJob(
+  '0 */1 * * * *',
+  async () => {
+    console.log('strat');
+    await doScrape();
+  },
+  null,
+  'America/Los_Angeles'
+);
+job.start();
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'seansmodd@gmail.com',
+    pass: '2thepack',
+  },
+});
+
 // Connection URL
 const url =
   'mongodb+srv://seanmodd:2thepack@senpexcluster.dn1ks.mongodb.net/senpex?retryWrites=true&w=majority';
@@ -22,7 +44,7 @@ MongoClient.connect(url, async function (err, client) {
 
   const db = client.db(dbName);
 
-  await doScrape(db);
+  // await doScrape(db);
   // insertDocuments(db, function () {
   //   client.close();
   // });
@@ -31,7 +53,7 @@ MongoClient.connect(url, async function (err, client) {
 let doScrape = async (db) => {
   await (async () => {
     const browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       defaultViewport: null,
     });
     const page = await browser.newPage();
@@ -102,8 +124,26 @@ let doScrape = async (db) => {
         const update = { $set: res };
         const options = { upsert: true };
         try {
+          let item = await db.collection('orderspanel').findOne(query);
+          if (!item) {
+            //send email here
+
+            var mailOptions = {
+              from: 'seansmodd@gmail.com',
+              to: 'sean@senpex.com',
+              subject: `you got new order ${res.title}`,
+              text: `we have new order ${JSON.stringify(res)}`,
+            };
+
+            transporter.sendMail(mailOptions, (err, res) => {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log('email sent');
+              }
+            });
+          }
           db.collection('orderspanel').updateOne(query, update, options);
-          exit();
         } catch (ex) {}
       }
       // console.log(data);
