@@ -1,0 +1,5 @@
+cron:
+  - description: scrape data from senpex.com/admin.php
+    url: /
+    schedule: every 5 minutes #UTC so translate to 7am to 8pm CET
+    target: ostad-scrape

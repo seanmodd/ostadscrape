@@ -8,18 +8,8 @@ const assert = require('assert');
 const { exit } = require('process');
 
 const nodemailer = require('nodemailer');
-const cron = require('cron');
 
-var job = new cron.CronJob(
-  '0 */1 * * * *',
-  async () => {
-    console.log('strat');
-    await doScrape();
-  },
-  null,
-  'America/Los_Angeles'
-);
-job.start();
+//
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -39,15 +29,9 @@ const dbName = 'senpex';
 
 // Use connect method to connect to the server
 MongoClient.connect(url, async function (err, client) {
-  assert.equal(null, err);
   console.log('Connected successfully to server');
-
   const db = client.db(dbName);
-
-  // await doScrape(db);
-  // insertDocuments(db, function () {
-  //   client.close();
-  // });
+  await doScrape(db);
 });
 
 let doScrape = async (db) => {
