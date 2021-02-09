@@ -96,7 +96,7 @@ let doScrape = async (db) => {
           return result;
         });
       });
-
+ //? ••••••••••••••••••••••••••••••••••••••••••••••••••••••••• Below is res equaling data[i] •••••••••••••••••••••••••••••••••••••••••••••••••••••••••
       for (var i in data) {
         let res = data[i];
 
@@ -111,7 +111,7 @@ let doScrape = async (db) => {
           let item = await db.collection('orderspanel').findOne(query);
           if (!item) {
             //send email here
-
+//? ••••••••••••••••••••••••••••••••••••••••••••••••••••••••• Below is details of the email being sent •••••••••••••••••••••••••••••••••••••••••••••••••••••••••
             var mailOptions = {
               from: 'seansmodd@gmail.com',
               to: 'sean@senpex.com',
