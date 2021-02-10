@@ -7,13 +7,25 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 const { exit } = require('process');
 
+const nodemailer = require('nodemailer');
+
+//
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'seansmodd@gmail.com',
+    pass: '2thepack',
+  },
+});
+
 // Connection URL
 const url =
   'mongodb+srv://seanmodd:2thepack@senpexcluster.dn1ks.mongodb.net/senpex?retryWrites=true&w=majority';
 // 'mongodb+srv://seanmodd:2thepack@scrapercluster.dn1ks.mongodb.net/mongosenpexretryWrites=true&w=majority';
 
 // Database Name
-const dbName = 'statusdb';
+const dbName = 'senpex';
 
 // Use connect method to connect to the server
 MongoClient.connect(url, async function (err, client) {
@@ -50,14 +62,10 @@ let doScrape = async (db) => {
     await page.type('#txtCaptcha', res);
     await page.click('#btnLogin');
     //! ••••••••••••••••••••••••••••••••••• Below is where the scraping starts!! •••••••••••••••••••••••••••••••••••••••••
-    // await page.goto('https://senpex.com/index.php?module=clnt_packs&mid=37');
-    await page.goto(
-      'https://senpex.com/index.php?module=clnt_view_pack&id=55426'
-    );
+    await page.goto('https://senpex.com/index.php?module=clnt_packs&mid=37');
     const max = 1;
     var iteration = 1;
     var resData = [];
-
     //? ••••••••••••••••••• Below is very CONFUSING... ask Omid! •••••••••••••••••••
     while (true) {
       let data = await page.$$eval('#table-3 tr', (rows) => {
@@ -99,6 +107,28 @@ let doScrape = async (db) => {
 
         const update = { $set: res };
         const options = { upsert: true };
+        try {
+          let item = await db.collection('details').findOne(query);
+          if (!item) {
+            //send email here
+            //? ••••••••••••••••••••••••••••••••••••••••••••••••••••••••• Below is details of the email being sent and the condition statement on it•••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+            var mailOptions = {
+              from: 'seansmodd@gmail.com',
+              to: 'sean@senpex.com',
+              subject: `you got new order ${res.title}`,
+              text: `we have new order ${JSON.stringify(res)}`,
+            };
+
+            transporter.sendMail(mailOptions, (err, res) => {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log('email sent');
+              }
+            });
+          }
+          db.collection('details').updateOne(query, update, options);
+        } catch (ex) {}
       }
       // console.log(data);
       // resData.push(result);
