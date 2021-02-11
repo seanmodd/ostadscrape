@@ -13,7 +13,7 @@ const url =
 // 'mongodb+srv://seanmodd:2thepack@scrapercluster.dn1ks.mongodb.net/mongosenpexretryWrites=true&w=majority';
 
 // Database Name
-const dbName = 'statusdb';
+const dbName = 'newdb';
 
 // Use connect method to connect to the server
 MongoClient.connect(url, async function (err, client) {
@@ -54,71 +54,29 @@ let doScrape = async (db) => {
     await page.goto(
       'https://senpex.com/index.php?module=clnt_view_pack&id=55426'
     );
-    const max = 1;
-    var iteration = 1;
-    var resData = [];
+    // const min = 550;
+    // var iteration = 1;
+    // var resData = [];
 
-    //? ••••••••••••••••••• Below is very CONFUSING... ask Omid! •••••••••••••••••••
-    while (true) {
-      let data = await page.$$eval('#table-3 tr', (rows) => {
-        return Array.from(rows, (row) => {
-          var cols = row.querySelectorAll('td');
+    var eee = await page.$x('//*[@id="t_gen_info"]/div[1]/div[1]/span/input');
 
-          cols = Array.from(cols, (col) => {
-            if (col.querySelector('textarea')) {
-              return ''; //col.querySelector('textarea').value; //? •••••••••• What is going on in this while loop??? ••••••••••
-            }
-            return col.innerText.trim()
-              ? col.innerText
-              : 'sean-00000000---empty';
-          });
+    // console.log(eee);
 
-          var result = {
-            packId: cols[1],
-            type: cols[2],
-            title: cols[3],
-            pickupTime: cols[4],
-            pickupAddress: cols[5],
-            deliveryAddress: cols[6],
-            ownerName: cols[7],
-            courierName: cols[8],
-            packagePrice: cols[9],
-            packageStatus: cols[10],
-          };
-          return result;
-        });
-      });
-      //? ••••••••••••••••••••••••••••••••••••••••••••••••••••••••• Below is res equaling data[i] •••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-      for (var i in data) {
-        let res = data[i];
+    var text = await page.evaluate((element) => element.value, eee[0]);
 
-        if (!res.packId) continue;
-        console.log(res);
-        const query = { packId: res.packId };
-        // const query = { name: "Deli Llama" };
+    console.log('text', text);
 
-        const update = { $set: res };
-        const options = { upsert: true };
-      }
-      // console.log(data);
-      // resData.push(result);
-      //get next page
-      // console.log('log data', iteration);
-      // console.log(resData);
-      // console.log(`//a[text()='${iteration}']`);
-      const [element] = await page.$x(`(//a[text()='${iteration}'])[1]`); //? •••••••••••• What does this mean??? ••••••••••••
-      // console.log(element);
-      const next = await page.evaluateHandle(
-        (e) => e.parentNode.nextSibling,
-        element
-      );
-      await next.click();
-      await page.waitForTimeout(2000);
-      if (iteration > max) break;
-      iteration++;
-    }
-    // resData = JSON.stringify(resData);
-    // fs.writeFileSync('result.json', resData);
+    eee = await page.$x('//*[@id="t_gen_info"]/div[1]/div[2]/span/input');
+    text = await page.evaluate((element) => element.value, eee[0]);
+
+    console.log('text2', text);
+
+    let data = await page.$$eval('.just_text', (forms) => {
+      return forms.map((form) => form.textContent);
+    });
+    // console.log(data);
+    // if (iteration < min) break;
+    // iteration--;
   })();
 };
 //! ••••••••••••••••••••••••••••••••••• Above is where the scraping ends!! •••••••••••••••••••••••••••••••••••••••••
