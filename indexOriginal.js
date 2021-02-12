@@ -63,7 +63,7 @@ let doScrape = async (db) => {
     await page.click('#btnLogin');
     //! ••••••••••••••••••••••••••••••••••• Below is where the scraping starts!! •••••••••••••••••••••••••••••••••••••••••
     await page.goto('https://senpex.com/index.php?module=clnt_packs&mid=37');
-    const max = 1;
+    const max = 394;
     var iteration = 1;
     var resData = [];
     //? ••••••••••••••••••• Below is very CONFUSING... ask Omid! •••••••••••••••••••
@@ -108,26 +108,25 @@ let doScrape = async (db) => {
         const update = { $set: res };
         const options = { upsert: true };
         try {
-          let item = await db.collection('details').findOne(query);
+          let item = await db.collection('orders').findOne(query);
           if (!item) {
             //send email here
             //? ••••••••••••••••••••••••••••••••••••••••••••••••••••••••• Below is details of the email being sent and the condition statement on it•••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-            var mailOptions = {
-              from: 'seansmodd@gmail.com',
-              to: 'sean@senpex.com',
-              subject: `you got new order ${res.title}`,
-              text: `we have new order ${JSON.stringify(res)}`,
-            };
-
-            transporter.sendMail(mailOptions, (err, res) => {
-              if (err) {
-                console.log(err);
-              } else {
-                console.log('email sent');
-              }
-            });
+            // var mailOptions = {
+            //   from: 'seansmodd@gmail.com',
+            //   to: 'sean@senpex.com',
+            //   subject: `you got new order ${res.title}`,
+            //   text: `we have new order ${JSON.stringify(res)}`,
+            // };
+            // transporter.sendMail(mailOptions, (err, res) => {
+            //   if (err) {
+            //     console.log(err);
+            //   } else {
+            //     console.log('email sent');
+            //   }
+            // });
           }
-          db.collection('details').updateOne(query, update, options);
+          db.collection('orders').updateOne(query, update, options);
         } catch (ex) {}
       }
       // console.log(data);
