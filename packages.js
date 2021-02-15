@@ -52,11 +52,11 @@ let doScrape = async (db) => {
     //! ••••••••••••••••••••••••••••••••••• Below is where the scraping starts!! •••••••••••••••••••••••••••••••••••••••••
     // await page.goto('https://senpex.com/index.php?module=clnt_packs&mid=37');
     await page.goto(
-      'https://senpex.com/index.php?module=clnt_view_pack&id=55426'
+      `https://senpex.com/index.php?module=clnt_view_pack&id=${min}`
     );
-    // const min = 550;
-    // var iteration = 1;
-    // var resData = [];
+    const min = 55426;
+    var iteration = 1;
+    var resData = [];
     //? Sending Name
     var eee = await page.$x('//*[@id="t_gen_info"]/div[1]/div[1]/span/input');
     var text = await page.evaluate((element) => element.value, eee[0]);
@@ -249,9 +249,9 @@ let doScrape = async (db) => {
     let data = await page.$$eval('.just_text', (forms) => {
       return forms.map((form) => form.textContent);
     });
-    // console.log(data);
-    // if (iteration < min) break;
-    // iteration--;
+    console.log(data);
+    if (iteration < min) break;
+    iteration--;
   })();
 };
 //! ••••••••••••••••••••••••••••••••••• Above is where the scraping ends!! •••••••••••••••••••••••••••••••••••••••••
