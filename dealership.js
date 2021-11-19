@@ -33,84 +33,84 @@ MongoClient.connect(url, async (err, client) => {
   const db = client.db(dbName);
   await doScrape(db);
 });
+// async function doScrape(db) {
+//   const browser = await puppeteer.launch({
+//     headless: false,
+//     args: ['--headless'],
+//   });
+//   const page = await browser.newPage();
+//   await page.goto('https://learnwebcode.github.io/practice-requests/');
+//   const names = ['red', 'green', 'blue'];
+//   await fs.writeFileSync('names.txt', names.join('\r\n'));
 
+//   await browser.close();
+// }
+// doScrape();
 const doScrape = async (db) => {
   await (async () => {
     const browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       defaultViewport: null,
     });
     const page = await browser.newPage();
     await page.goto('https://www.stevenscreekkia.com/sitemap.htm');
+    // await page.goto('https://learnwebcode.github.io/practice-requests/');
 
-    const max = 1;
-    let iteration = 1;
-    const resData = [];
-    // ? ••••••••••••••••••• Below is very CONFUSING... ask Omid! •••••••••••••••••••
-    while (true) {
-      const data = await page.$$eval('#autocarlinks', (links) =>
-        Array.from(links, (link) => {
-          const items = link.querySelectorAll('td');
-          // col.querySelector('textarea').value;
+    const inventory = await page.evaluate(
+      () =>
+        Array.from(
+          document.querySelectorAll(
+            '.inventory-listing-sitemap .content ul li a'
+          )
+        ).map((x) => x.textContent) // .map((x) => x.textContent)
+    );
 
-          const result = {
-            name: items[1],
-          };
-          return result;
-        })
-      );
-      // ? ••••••••••••••••••••••••••••••••••••••••••••••••••••••••• Below is res equaling data[i] •••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-      for (const i in data) {
-        const res = data[i];
+    await fs.writeFileSync('inventory.txt', inventory.join('\r\n'));
+    // console.log('INVENTORY FROM DEALERSHIP.JS', inventory);
 
-        if (!res.packId) continue;
-        console.log(res);
-        const query = { packId: res.packId };
-        // const query = { name: "Deli Llama" };
+    const inventoryURLs = await page.evaluate(
+      () =>
+        Array.from(
+          document.querySelectorAll(
+            '.inventory-listing-sitemap .content ul li a'
+          )
+        ).map((x) => x.href) // .map((x) => x.textContent)
+    );
+    await fs.writeFileSync('inventoryURLs.txt', inventoryURLs.join('\r\n'));
 
-        const update = { $set: res };
-        const options = { upsert: true };
-        try {
-          const item = await db.collection('variants_kia').findOne(query);
-          if (!item) {
-            // send email here
-            // ? ••••••••••••••••••••••••••••••••••••••••••••••••••••••••• Below is details of the email being sent •••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-            const mailOptions = {
-              from: 'seansmodd@gmail.com',
-              to: 'sean@senpex.com',
-              subject: `you got new order ${res.title}`,
-              text: `we have new order ${JSON.stringify(res)}`,
-            };
+    // await page.goto(inventoryURLs);
 
-            transporter.sendMail(mailOptions, (err, res) => {
-              if (err) {
-                console.log(err);
-              } else {
-                console.log('email sent');
-              }
-            });
+    async function visitAllPages() {
+      for (let i = 0; i < inventoryURLs.length; i++) {
+        await page.goto(inventoryURLs[i]);
+
+        const singleCar = await page.evaluate(async () => {
+          const [car_name, car_price] = Array.from(
+            document.querySelectorAll('.font-weight-bold span')
+          ).map((x) => x.textContent); // .map((x) => x.textContent)
+          const vin = getElementByXpath(
+            "//li[contains(., 'VIN:')]"
+          )?.textContent;
+          const stock = getElementByXpath(
+            "//li[contains(., 'Stock:')]"
+          )?.textContent;
+          function getElementByXpath(path) {
+            return document.evaluate(
+              path,
+              document,
+              null,
+              XPathResult.FIRST_ORDERED_NODE_TYPE,
+              null
+            ).singleNodeValue;
           }
-          db.collection('variants_kia').updateOne(query, update, options);
-        } catch (ex) {}
+          return { car_name, car_price, vin, stock };
+        });
+        console.log('SINGLE CAR FROM DEALERSHIP.JS', singleCar);
+        await fs.writeFileSync('singleCar.json', JSON.stringify(singleCar));
       }
-      // console.log(data);
-      // resData.push(result);
-      // get next page
-      // console.log('log data', iteration);
-      // console.log(resData);
-      // console.log(`//a[text()='${iteration}']`);
-      const [element] = await page.$x(`(//a[text()='${iteration}'])[1]`); // ? •••••••••••• What does this mean??? ••••••••••••
-      // console.log(element);
-      const next = await page.evaluateHandle(
-        (e) => e.parentNode.nextSibling,
-        element
-      );
-      await next.click();
-      await page.waitForTimeout(2000);
-      if (iteration > max) break;
-      iteration++;
     }
-    // resData = JSON.stringify(resData);
-    // fs.writeFileSync('result.json', resData);
+    await visitAllPages();
+
+    await browser.close();
   })();
 };
