@@ -85,13 +85,18 @@ const doScrape = async (db) => {
         await page.goto(inventoryURLs[i]);
 
         const singleCar = await page.evaluate(async () => {
+          //* SCRAPE car_name AND car_price BELOW
           const [car_name, car_price] = Array.from(
             document.querySelectorAll('.font-weight-bold span')
           ).map((x) => x.textContent); // .map((x) => x.textContent)
-          const vin = getElementByXpath(
+
+          //* SCRAPE car_vin BELOW
+          const car_vin = getElementByXpath(
             "//li[contains(., 'VIN:')]"
           )?.textContent;
-          const stock = getElementByXpath(
+
+          //* SCRAPE car_stock BELOW
+          const car_stock = getElementByXpath(
             "//li[contains(., 'Stock:')]"
           )?.textContent;
           function getElementByXpath(path) {
@@ -103,7 +108,7 @@ const doScrape = async (db) => {
               null
             ).singleNodeValue;
           }
-          return { car_name, car_price, vin, stock };
+          return { car_name, car_price, car_vin, car_stock };
         });
         console.log('SINGLE CAR FROM DEALERSHIP.JS', singleCar);
         await fs.writeFileSync('singleCar.json', JSON.stringify(singleCar));
