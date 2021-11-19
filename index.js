@@ -3,7 +3,7 @@ const { PythonShell } = require('python-shell');
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient } = require('mongodb');
 const assert = require('assert');
 const { exit } = require('process');
 
@@ -28,13 +28,13 @@ const url =
 const dbName = 'senpex';
 
 // Use connect method to connect to the server
-MongoClient.connect(url, async function (err, client) {
+MongoClient.connect(url, async (err, client) => {
   console.log('Connected successfully to server');
   const db = client.db(dbName);
   await doScrape(db);
 });
 
-let doScrape = async (db) => {
+const doScrape = async (db) => {
   await (async () => {
     const browser = await puppeteer.launch({
       headless: true,
@@ -64,24 +64,24 @@ let doScrape = async (db) => {
     //! ••••••••••••••••••••••••••••••••••• Below is where the scraping starts!! •••••••••••••••••••••••••••••••••••••••••
     await page.goto('https://senpex.com/index.php?module=clnt_packs&mid=37');
     const max = 1;
-    var iteration = 1;
-    var resData = [];
-    //? ••••••••••••••••••• Below is very CONFUSING... ask Omid! •••••••••••••••••••
+    let iteration = 1;
+    const resData = [];
+    // ? ••••••••••••••••••• Below is very CONFUSING... ask Omid! •••••••••••••••••••
     while (true) {
-      let data = await page.$$eval('#table-3 tr', (rows) => {
-        return Array.from(rows, (row) => {
-          var cols = row.querySelectorAll('td');
+      const data = await page.$$eval('#table-3 tr', (rows) =>
+        Array.from(rows, (row) => {
+          let cols = row.querySelectorAll('td');
 
           cols = Array.from(cols, (col) => {
             if (col.querySelector('textarea')) {
-              return ''; //col.querySelector('textarea').value; //? •••••••••• What is going on in this while loop??? ••••••••••
+              return ''; // col.querySelector('textarea').value; //? •••••••••• What is going on in this while loop??? ••••••••••
             }
             return col.innerText.trim()
               ? col.innerText
               : 'sean-00000000---empty';
           });
 
-          var result = {
+          const result = {
             packId: cols[1],
             type: cols[2],
             title: cols[3],
@@ -94,11 +94,11 @@ let doScrape = async (db) => {
             packageStatus: cols[10],
           };
           return result;
-        });
-      });
- //? ••••••••••••••••••••••••••••••••••••••••••••••••••••••••• Below is res equaling data[i] •••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-      for (var i in data) {
-        let res = data[i];
+        })
+      );
+      // ? ••••••••••••••••••••••••••••••••••••••••••••••••••••••••• Below is res equaling data[i] •••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+      for (const i in data) {
+        const res = data[i];
 
         if (!res.packId) continue;
         console.log(res);
@@ -108,11 +108,11 @@ let doScrape = async (db) => {
         const update = { $set: res };
         const options = { upsert: true };
         try {
-          let item = await db.collection('orderspanel').findOne(query);
+          const item = await db.collection('orderspanel').findOne(query);
           if (!item) {
-            //send email here
-//? ••••••••••••••••••••••••••••••••••••••••••••••••••••••••• Below is details of the email being sent •••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-            var mailOptions = {
+            // send email here
+            // ? ••••••••••••••••••••••••••••••••••••••••••••••••••••••••• Below is details of the email being sent •••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+            const mailOptions = {
               from: 'seansmodd@gmail.com',
               to: 'sean@senpex.com',
               subject: `you got new order ${res.title}`,
@@ -132,11 +132,11 @@ let doScrape = async (db) => {
       }
       // console.log(data);
       // resData.push(result);
-      //get next page
+      // get next page
       // console.log('log data', iteration);
       // console.log(resData);
       // console.log(`//a[text()='${iteration}']`);
-      const [element] = await page.$x(`(//a[text()='${iteration}'])[1]`); //? •••••••••••• What does this mean??? ••••••••••••
+      const [element] = await page.$x(`(//a[text()='${iteration}'])[1]`); // ? •••••••••••• What does this mean??? ••••••••••••
       // console.log(element);
       const next = await page.evaluateHandle(
         (e) => e.parentNode.nextSibling,
@@ -154,12 +154,12 @@ let doScrape = async (db) => {
 //! ••••••••••••••••••••••••••••••••••• Above is where the scraping ends!! •••••••••••••••••••••••••••••••••••••••••
 async function solve(captcha) {
   return new Promise((resolve, reject) => {
-    var scriptPath = path.join(__dirname, './captcha_resolver.py');
-    let options = {
+    const scriptPath = path.join(__dirname, './captcha_resolver.py');
+    const options = {
       pythonPath: '/Users/seanmodd/opt/anaconda3/bin/python',
       args: [captcha],
     };
-    PythonShell.run(scriptPath, options, function (err, results) {
+    PythonShell.run(scriptPath, options, (err, results) => {
       if (err) {
         // fs.writeFileSync("omid-omid.html", data);
         console.log(err);

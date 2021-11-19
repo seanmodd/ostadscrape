@@ -1,4 +1,3 @@
-
 module.exports = {
   extends: ['wesbos'],
   parserOptions: {

@@ -1,1 +1,12 @@
-{"car_name":"Elantra Sedan","car_price":"$14,995","car_vin":"VIN: 5NPDH4AE8GH682456 ","car_stock":" Stock: 22K0180A ","car_odometer":"86,029 miles","car_views":"9 views in the past 7 days","car_exteriorColor":"Lakeside Blue","car_samplePayment":"$267","car_samplePaymentDetails":"60  Months @ 6.9% A.P.R. (estimated financing rate) $1,500%  Down Payment","car_carFaxUrl":"https://www.carfax.com/cfm/ccc_displayhistoryrpt.cfm?partner=DLR_3&vin=5NPDH4AE8GH682456"}
+{
+  "car_carFaxUrl": "https://www.carfax.com/cfm/ccc_displayhistoryrpt.cfm?partner=DLR_3&vin=1HGCR2F84DA068217",
+  "car_exteriorColor": "Alabaster Silver Metallic",
+  "car_name": "Accord EX-L Sedan",
+  "car_odometer": "142,602 miles",
+  "car_price": "$12,995",
+  "car_samplePayment": "$231",
+  "car_samplePaymentDetails": "60  Months @ 6.9% A.P.R. (estimated financing rate) $1,300%  Down Payment",
+  "car_stock": " Stock: 22K0132A ",
+  "car_views": "19 views in the past 7 days",
+  "car_vin": "VIN: 1HGCR2F84DA068217 "
+}

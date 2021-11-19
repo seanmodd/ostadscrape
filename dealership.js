@@ -140,6 +140,11 @@ const doScrape = async (db) => {
             "//li[contains(., ' views in the past')]"
           )?.textContent;
 
+          //* SCRAPE car_imgSrcUrl BELOW
+          const car_imgSrcUrl = getElementByXpath(
+            "//img[contains(., 'images.dealer.com')]"
+          )?.src;
+          console.log('this is the car_imgSrcUrl: ', car_imgSrcUrl);
           return {
             car_name,
             car_price,
@@ -151,6 +156,7 @@ const doScrape = async (db) => {
             car_samplePayment,
             car_samplePaymentDetails,
             car_carFaxUrl,
+            car_imgSrcUrl,
           };
         });
         console.log('SINGLE CAR FROM DEALERSHIP.JS', singleCar);
