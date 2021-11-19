@@ -90,15 +90,26 @@ const doScrape = async (db) => {
             document.querySelectorAll('.font-weight-bold span')
           ).map((x) => x.textContent); // .map((x) => x.textContent)
 
-          //* SCRAPE car_vin BELOW
-          const car_vin = getElementByXpath(
-            "//li[contains(., 'VIN:')]"
-          )?.textContent;
+          //* SCRAPE car_samplePayment BELOW
+          const car_samplePayment = document.querySelector(
+            '#sample-payment-value strong'
+          ).textContent;
 
-          //* SCRAPE car_stock BELOW
-          const car_stock = getElementByXpath(
-            "//li[contains(., 'Stock:')]"
-          )?.textContent;
+          //* SCRAPE car_carFaxUrl BELOW
+          const car_carFaxUrl = document.querySelector('.carfax a').href;
+
+          //* SCRAPE car_samplePaymentDetails BELOW
+          const car_samplePaymentDetails = document.querySelector(
+            '.payment-summary-support-text'
+          ).textContent;
+
+          //* SCRAPE car_exteriorColor BELOW
+          const car_exteriorColorLabel =
+            document.querySelector('.normalized-swatch');
+          const car_exteriorColor =
+            car_exteriorColorLabel.nextSibling.textContent;
+
+          //* getElementByXpath function is below...
           function getElementByXpath(path) {
             return document.evaluate(
               path,
@@ -108,7 +119,39 @@ const doScrape = async (db) => {
               null
             ).singleNodeValue;
           }
-          return { car_name, car_price, car_vin, car_stock };
+
+          //* SCRAPE car_vin BELOW
+          const car_vin = getElementByXpath(
+            "//li[contains(., 'VIN:')]"
+          )?.textContent;
+
+          //* SCRAPE car_stock BELOW
+          const car_stock = getElementByXpath(
+            "//li[contains(., 'Stock:')]"
+          )?.textContent;
+
+          //* SCRAPE car_odometer BELOW
+          const car_odometer = getElementByXpath(
+            "//span[contains(., ' miles')]"
+          )?.textContent;
+
+          //* SCRAPE car_views BELOW
+          const car_views = getElementByXpath(
+            "//li[contains(., ' views in the past')]"
+          )?.textContent;
+
+          return {
+            car_name,
+            car_price,
+            car_vin,
+            car_stock,
+            car_odometer,
+            car_views,
+            car_exteriorColor,
+            car_samplePayment,
+            car_samplePaymentDetails,
+            car_carFaxUrl,
+          };
         });
         console.log('SINGLE CAR FROM DEALERSHIP.JS', singleCar);
         await fs.writeFileSync('singleCar.json', JSON.stringify(singleCar));
