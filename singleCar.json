@@ -1,12 +1,1 @@
-{
-  "car_carFaxUrl": "https://www.carfax.com/cfm/ccc_displayhistoryrpt.cfm?partner=DLR_3&vin=1HGCR2F84DA068217",
-  "car_exteriorColor": "Alabaster Silver Metallic",
-  "car_name": "Accord EX-L Sedan",
-  "car_odometer": "142,602 miles",
-  "car_price": "$12,995",
-  "car_samplePayment": "$231",
-  "car_samplePaymentDetails": "60  Months @ 6.9% A.P.R. (estimated financing rate) $1,300%  Down Payment",
-  "car_stock": " Stock: 22K0132A ",
-  "car_views": "19 views in the past 7 days",
-  "car_vin": "VIN: 1HGCR2F84DA068217 "
-}
+{"car_name":"Civic LX Sedan","car_price":"$16,995","car_vin":"VIN: 19XFC2F59HE218084 ","car_stock":" Stock: 22K0084B ","car_odometer":"92,072 miles","car_views":"10 views in the past 7 days","car_exteriorColor":"Modern Steel","car_samplePayment":"$302","car_samplePaymentDetails":"60  Months @ 6.9% A.P.R. (estimated financing rate) $1,700%  Down Payment","car_carFaxUrl":"https://www.carfax.com/cfm/ccc_displayhistoryrpt.cfm?partner=DLR_3&vin=19XFC2F59HE218084","car_imgSrcUrl":["https://pictures.dealer.com/s/stevenscreekkia/1462/d96a2daf832dc4bd68b3f521c0a289efx.jpg?impolicy=resize&w=320","https://pictures.dealer.com/s/stevenscreekkia/1600/b30ebd344ecca10a245c9ad5cd40bb42x.jpg?impolicy=resize&w=320","https://pictures.dealer.com/s/stevenscreekkia/0100/581ffb3be9329c560e6c1fc304b4421cx.jpg?impolicy=resize&w=320","https://pictures.dealer.com/s/stevenscreekkia/0422/c056da86c4b057a34405bb270ee434d5x.jpg?impolicy=resize&w=320"],"car_imgSrcUrl0":"https://pictures.dealer.com/s/stevenscreekkia/1462/d96a2daf832dc4bd68b3f521c0a289efx.jpg?impolicy=resize&w=320","car_imgSrcUrl1":"https://pictures.dealer.com/s/stevenscreekkia/1600/b30ebd344ecca10a245c9ad5cd40bb42x.jpg?impolicy=resize&w=320","car_imgSrcUrl2":"https://pictures.dealer.com/s/stevenscreekkia/0100/581ffb3be9329c560e6c1fc304b4421cx.jpg?impolicy=resize&w=320","car_imgSrcUrl3":"https://pictures.dealer.com/s/stevenscreekkia/0422/c056da86c4b057a34405bb270ee434d5x.jpg?impolicy=resize&w=320"}

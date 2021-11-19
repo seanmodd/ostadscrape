@@ -85,6 +85,33 @@ const doScrape = async (db) => {
         await page.goto(inventoryURLs[i]);
 
         const singleCar = await page.evaluate(async () => {
+          const car_currentCarURL = window.location.href;
+
+          //* SCRAPE car_imgSrcUrl BELOW
+
+          const car_imgSrcUrlAll = document
+            .querySelectorAll('.slider img')
+            .map((x) => x.src); // .map((x) => x.textContent)
+
+          const car_imgSrcUrl = car_imgSrcUrlAll.filter(
+            (x) =>
+              x.includes('/pictures.dealer.com/') ||
+              x.includes('/images.dealer.com/')
+          );
+          const car_imgSrcUrl0 = car_imgSrcUrl[0];
+          const car_imgSrcUrl1 = car_imgSrcUrl[1];
+          const car_imgSrcUrl2 = car_imgSrcUrl[2];
+          const car_imgSrcUrl3 = car_imgSrcUrl[3];
+          const car_imgSrcUrl4 = car_imgSrcUrl[4];
+
+          // const [car_imgSrcUrl] = Array.from(
+          //   document.querySelectorAll('.slider img')
+          // ).map((x) => x.src); // .map((x) => x.textContent)
+
+          // car_imgSrcUrl.forEach((element) => {
+          //   console.log(element);
+          // });
+
           //* SCRAPE car_name AND car_price BELOW
           const [car_name, car_price] = Array.from(
             document.querySelectorAll('.font-weight-bold span')
@@ -96,7 +123,8 @@ const doScrape = async (db) => {
           ).textContent;
 
           //* SCRAPE car_carFaxUrl BELOW
-          const car_carFaxUrl = document.querySelector('.carfax a').href;
+          const car_carFaxUrl =
+            document.querySelector('.carfax a').href || 'missing carfax report';
 
           //* SCRAPE car_samplePaymentDetails BELOW
           const car_samplePaymentDetails = document.querySelector(
@@ -140,12 +168,8 @@ const doScrape = async (db) => {
             "//li[contains(., ' views in the past')]"
           )?.textContent;
 
-          //* SCRAPE car_imgSrcUrl BELOW
-          const car_imgSrcUrl = getElementByXpath(
-            "//img[contains(., 'images.dealer.com')]"
-          )?.src;
-          console.log('this is the car_imgSrcUrl: ', car_imgSrcUrl);
           return {
+            car_currentCarURL,
             car_name,
             car_price,
             car_vin,
@@ -157,6 +181,21 @@ const doScrape = async (db) => {
             car_samplePaymentDetails,
             car_carFaxUrl,
             car_imgSrcUrl,
+
+            // car_imgSrcUrl[i],
+            car_imgSrcUrl0,
+            car_imgSrcUrl1,
+            car_imgSrcUrl2,
+            car_imgSrcUrl3,
+            car_imgSrcUrl4,
+            // car_imgSrcUrl5,
+            // car_imgSrcUrl6,
+            // car_imgSrcUrl7,
+            // car_imgSrcUrl8,
+            // car_imgSrcUrl9,
+            // car_imgSrcUrl10,
+            // car_imgSrcUrl11,
+            // car_imgSrcUrl12,
           };
         });
         console.log('SINGLE CAR FROM DEALERSHIP.JS', singleCar);
