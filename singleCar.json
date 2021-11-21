@@ -1,1 +1,18 @@
-{"car_name":"Civic LX Sedan","car_price":"$16,995","car_vin":"VIN: 19XFC2F59HE218084 ","car_stock":" Stock: 22K0084B ","car_odometer":"92,072 miles","car_views":"10 views in the past 7 days","car_exteriorColor":"Modern Steel","car_samplePayment":"$302","car_samplePaymentDetails":"60  Months @ 6.9% A.P.R. (estimated financing rate) $1,700%  Down Payment","car_carFaxUrl":"https://www.carfax.com/cfm/ccc_displayhistoryrpt.cfm?partner=DLR_3&vin=19XFC2F59HE218084","car_imgSrcUrl":["https://pictures.dealer.com/s/stevenscreekkia/1462/d96a2daf832dc4bd68b3f521c0a289efx.jpg?impolicy=resize&w=320","https://pictures.dealer.com/s/stevenscreekkia/1600/b30ebd344ecca10a245c9ad5cd40bb42x.jpg?impolicy=resize&w=320","https://pictures.dealer.com/s/stevenscreekkia/0100/581ffb3be9329c560e6c1fc304b4421cx.jpg?impolicy=resize&w=320","https://pictures.dealer.com/s/stevenscreekkia/0422/c056da86c4b057a34405bb270ee434d5x.jpg?impolicy=resize&w=320"],"car_imgSrcUrl0":"https://pictures.dealer.com/s/stevenscreekkia/1462/d96a2daf832dc4bd68b3f521c0a289efx.jpg?impolicy=resize&w=320","car_imgSrcUrl1":"https://pictures.dealer.com/s/stevenscreekkia/1600/b30ebd344ecca10a245c9ad5cd40bb42x.jpg?impolicy=resize&w=320","car_imgSrcUrl2":"https://pictures.dealer.com/s/stevenscreekkia/0100/581ffb3be9329c560e6c1fc304b4421cx.jpg?impolicy=resize&w=320","car_imgSrcUrl3":"https://pictures.dealer.com/s/stevenscreekkia/0422/c056da86c4b057a34405bb270ee434d5x.jpg?impolicy=resize&w=320"}
+{
+  "car_carFaxUrl": "http://www.carfax.com/cfm/ccc_displayhistoryrpt.cfm?partner=DLR_3&vin=3KPFL4A75HE013348",
+  "car_currentCarURL": "https://www.stevenscreekkia.com/certified/Kia/2017-Kia-Forte-20cc747f0a0e09b1036c476542d71fd3.htm",
+  "car_exteriorColor": "Garnet Red",
+  "car_imgSrcUrl0": "https://pictures.dealer.com/s/stevenscreekkia/1953/f0c150112aed8675f796b9430b6c3f7bx.jpg?impolicy=resize&w=320",
+  "car_imgSrcUrl1": "https://pictures.dealer.com/s/stevenscreekkia/1892/f508ee9ce34af0e0610cc78eb9af74a5x.jpg?impolicy=resize&w=320",
+  "car_imgSrcUrl2": "https://pictures.dealer.com/s/stevenscreekkia/1130/cf8018f5493510d756fe399a2095dbecx.jpg?impolicy=resize&w=320",
+  "car_imgSrcUrl3": "https://pictures.dealer.com/s/stevenscreekkia/1711/4cb8d737e1f87e488ff45ee5da899fa5x.jpg?impolicy=resize&w=320",
+  "car_imgSrcUrl4": null,
+  "car_name": "Forte LX Sedan",
+  "car_odometer": "56,890 miles",
+  "car_price": "$15,995",
+  "car_samplePayment": "$284",
+  "car_samplePaymentDetails": "60  Months @ 6.9% A.P.R. (estimated financing rate) $1,600%  Down Payment",
+  "car_stock": " Stock: 21K0617B ",
+  "car_views": "19 views in the past 7 days",
+  "car_vin": "VIN: 3KPFL4A75HE013348 "
+}
