@@ -45,14 +45,12 @@ const doScrape = async (db) => {
     const inventoryURLs = await page.evaluate(
       () =>
         Array.from(
-          new Set(
-            document.querySelectorAll(
-              '.inventory-listing-sitemap .content ul li a'
-            )
+          document.querySelectorAll(
+            '.inventory-listing-sitemap .content ul li a'
           )
         ).map((x) => x.href) // .map((x) => x.textContent)
-      // make sure all hrefs are unique!
     );
+    // making sure all urls are unique!
     const unique = (value, index, self) => self.indexOf(value) === index;
     const uniqueInventoryURLs = inventoryURLs.filter(unique);
     await fs.writeFileSync(
