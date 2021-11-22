@@ -36,7 +36,7 @@ MongoClient.connect(url, async (err, client) => {
 const doScrape = async (db) => {
   await (async () => {
     const browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       defaultViewport: null,
     });
     const page = await browser.newPage();
@@ -182,9 +182,14 @@ const doScrape = async (db) => {
           };
         });
         console.log('SINGLE CAR FROM DEALERSHIP.JS', singleCar);
+        // now trying to add to MongoDB
+        const res = uniqueInventoryURLs[i];
+        console.log('This is res!!!!! : ', res);
+        // below we are now trying to add to local singleCar.json file
         await fs.writeFileSync('singleCar.json', JSON.stringify(singleCar));
       }
     }
+
     await visitAllPages();
 
     await browser.close();
