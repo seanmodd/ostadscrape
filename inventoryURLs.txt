@@ -1,5 +1,6 @@
 https://www.stevenscreekkia.com/used/Audi/2013-Audi-A3-27a7f30d0a0e09b03ce7d88e50d75ec9.htm
 https://www.stevenscreekkia.com/used/Audi/2018-Audi-Q5-da3176630a0e09b0009293040b28a7ef.htm
+https://www.stevenscreekkia.com/used/Audi/2021-Audi-Q5-4690eead0a0e09af4712a4f7e6678c47.htm
 https://www.stevenscreekkia.com/used/Ford/2010-Ford-Flex-0de7bef70a0e09713fd5c54c71177d44.htm
 https://www.stevenscreekkia.com/used/Ford/2014-Ford-Flex-9aef22170a0e09b169700c6b914c904e.htm
 https://www.stevenscreekkia.com/used/Honda/2016-Honda-Accord-1d5aba8c0a0e09b002da58c12aac78d2.htm
@@ -27,13 +28,13 @@ https://www.stevenscreekkia.com/new/Kia/2022-Kia-Niro+EV-3a5bfa3a0a0e0971057e90d
 https://www.stevenscreekkia.com/new/Kia/2022-Kia-Niro+EV-3a5bfafa0a0e0971057e90d025851713.htm
 https://www.stevenscreekkia.com/new/Kia/2022-Kia-Niro+EV-3a5bfd050a0e0971057e90d05d840828.htm
 https://www.stevenscreekkia.com/new/Kia/2022-Kia-Niro+EV-3a5bf9120a0e0971057e90d006babf83.htm
-https://www.stevenscreekkia.com/new/Kia/2022-Kia-Niro+EV-3a5bfc8f0a0e0971057e90d079c74098.htm
 https://www.stevenscreekkia.com/new/Kia/2022-Kia-Niro+Plug-In+Hybrid-9a6826d10a0e09b002c51cd828d4b7f8.htm
 https://www.stevenscreekkia.com/certified/Kia/2019-Kia-Niro+Plug-In+Hybrid-31f69fec0a0e09a9205370ae27e424fc.htm
 https://www.stevenscreekkia.com/certified/Kia/2019-Kia-Niro+Plug-In+Hybrid-31f69df60a0e09a81033cc8438bfa759.htm
 https://www.stevenscreekkia.com/new/Kia/2022-Kia-Niro+Plug-In+Hybrid-8264c2cc0a0e09af7e331ff81851348a.htm
 https://www.stevenscreekkia.com/used/Kia/2013-Kia-Optima-4885befe0a0e09b14afc9067e9fce218.htm
 https://www.stevenscreekkia.com/certified/Kia/2020-Kia-Optima-abd7dddb0a0e09b1233f1cf99fe758d6.htm
+https://www.stevenscreekkia.com/used/Kia/2019-Kia-Optima-4690f0630a0e09a9205370aed3840ba1.htm
 https://www.stevenscreekkia.com/used/Kia/2018-Kia-Optima-b0fe3fdb0a0e09a8428d4906ecac9aa0.htm
 https://www.stevenscreekkia.com/certified/Kia/2019-Kia-Optima+Plug-In+Hybrid-1d5ab9a00a0e09b002da58c1ec417fa7.htm
 https://www.stevenscreekkia.com/new/Kia/2022-Kia-Rio-0c26daa60a0e09af4c14b92375d6cd1f.htm
@@ -66,6 +67,7 @@ https://www.stevenscreekkia.com/new/Kia/2022-Kia-Telluride-3007c2180a0e0971057e9
 https://www.stevenscreekkia.com/new/Kia/2022-Kia-Telluride-3007cb380a0e0971057e90d092f876a8.htm
 https://www.stevenscreekkia.com/new/Kia/2022-Kia-Telluride-4d52b2fc0a0e09b009a4e0d596d4cb0e.htm
 https://www.stevenscreekkia.com/new/Kia/2022-Kia-Telluride-eb5653540a0e09a87df04d0df5631e39.htm
+https://www.stevenscreekkia.com/used/LEXUS/2014-LEXUS-GS+350-4690f4950a0e09a9205370aec2aab707.htm
 https://www.stevenscreekkia.com/used/Mazda/2016-Mazda-Mazda+CX-5-e47e8fd20a0e09af52fe30a2ea85e5fd.htm
 https://www.stevenscreekkia.com/used/Mercedes-Benz/2018-Mercedes-Benz-C-Class-f3f0be300a0e09af458cd4f7aefd83df.htm
 https://www.stevenscreekkia.com/used/Nissan/2017-Nissan-Murano-f91726900a0e09a9380878d8e481165c.htm
@@ -79,6 +81,7 @@ https://www.stevenscreekkia.com/used/Volkswagen/2019-Volkswagen-Jetta-eecb9cb70a
 https://www.stevenscreekkia.com/used/Volvo/2012-Volvo-S60-a18b0f630a0e097170490a713d352d44.htm
 https://www.stevenscreekkia.com/used/Audi/2013-Audi-A3-27a7f30d0a0e09b03ce7d88e50d75ec9.htm
 https://www.stevenscreekkia.com/used/Audi/2018-Audi-Q5-da3176630a0e09b0009293040b28a7ef.htm
+https://www.stevenscreekkia.com/used/Audi/2021-Audi-Q5-4690eead0a0e09af4712a4f7e6678c47.htm
 https://www.stevenscreekkia.com/used/Ford/2010-Ford-Flex-0de7bef70a0e09713fd5c54c71177d44.htm
 https://www.stevenscreekkia.com/used/Ford/2014-Ford-Flex-9aef22170a0e09b169700c6b914c904e.htm
 https://www.stevenscreekkia.com/used/Honda/2016-Honda-Accord-1d5aba8c0a0e09b002da58c12aac78d2.htm
@@ -97,6 +100,7 @@ https://www.stevenscreekkia.com/certified/Kia/2019-Kia-Niro+Plug-In+Hybrid-31f69
 https://www.stevenscreekkia.com/certified/Kia/2019-Kia-Niro+Plug-In+Hybrid-31f69df60a0e09a81033cc8438bfa759.htm
 https://www.stevenscreekkia.com/used/Kia/2013-Kia-Optima-4885befe0a0e09b14afc9067e9fce218.htm
 https://www.stevenscreekkia.com/certified/Kia/2020-Kia-Optima-abd7dddb0a0e09b1233f1cf99fe758d6.htm
+https://www.stevenscreekkia.com/used/Kia/2019-Kia-Optima-4690f0630a0e09a9205370aed3840ba1.htm
 https://www.stevenscreekkia.com/used/Kia/2018-Kia-Optima-b0fe3fdb0a0e09a8428d4906ecac9aa0.htm
 https://www.stevenscreekkia.com/certified/Kia/2019-Kia-Optima+Plug-In+Hybrid-1d5ab9a00a0e09b002da58c1ec417fa7.htm
 https://www.stevenscreekkia.com/certified/Kia/2020-Kia-Sorento-f9172af10a0e09b01a9e6aa770f2accc.htm
@@ -110,5 +114,3 @@ https://www.stevenscreekkia.com/certified/Kia/2019-Kia-Soul+EV-27a7f0d10a0e09b03
 https://www.stevenscreekkia.com/certified/Kia/2019-Kia-Soul+EV-039cf88b0a0e09b14c28d993d2a40f08.htm
 https://www.stevenscreekkia.com/certified/Kia/2019-Kia-Soul+EV-df57414b0a0e09b16045179307eb42d6.htm
 https://www.stevenscreekkia.com/certified/Kia/2018-Kia-Soul+EV-3c40e5220a0e0971057e90d0221191f6.htm
-https://www.stevenscreekkia.com/certified/Kia/2018-Kia-Sportage-abd7dea00a0e09b1233f1cf9674b5127.htm
-https://www.stevenscreekkia.com/used/Kia/2017-Kia-Sportage-fe74c3c60a0e0971219d9d2160ce814d.htm

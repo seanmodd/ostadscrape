@@ -57,6 +57,10 @@ const doScrape = async (db) => {
     async function visitAllPages() {
       for (let i = 0; i < inventoryURLs.length; i++) {
         await page.goto(inventoryURLs[i]);
+        console.log('This is the inventoryURLs.length: ', inventoryURLs.length);
+        console.log('This is the i number: ', i);
+        console.log('This is the inventoryURLs[i]: ', inventoryURLs[i]);
+        // we have to loop through the unique inventoryURLs and visit each one
 
         const singleCar = await page.evaluate(async () => {
           const car_currentCarURL = window.location.href || null;
