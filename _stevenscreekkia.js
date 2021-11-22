@@ -26,6 +26,7 @@ const url =
 // Database Name
 const dbName = 'strapi';
 
+// Now must sync with MongoDB
 // Use connect method to connect to the server
 MongoClient.connect(url, async (err, client) => {
   console.log('Connected successfully to server');
