@@ -183,8 +183,39 @@ const doScrape = async (db) => {
         });
         console.log('SINGLE CAR FROM DEALERSHIP.JS', singleCar);
         // now trying to add to MongoDB
-        const res = uniqueInventoryURLs[i];
-        console.log('This is res!!!!! : ', res);
+        for (const i in singleCar) {
+          const res = singleCar;
+          if (!res.car_vin) continue;
+          console.log(res);
+          const query = { car_vin: res.car_vin };
+          // const query = { name: "Deli Llama" };
+
+          const update = { $set: res };
+          const options = { upsert: true };
+          try {
+            const item = await db.collection('strapi').findOne(query);
+            if (!item) {
+              // send email here
+              // ? ••••••••••••••••••••••••••••••••••••••••••••••••••••••••• Below is details of the email being sent •••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+              const mailOptions = {
+                from: 'seansmodd@gmail.com',
+                to: 'sean@senpex.com',
+                subject: `you got new order ${res.title}`,
+                text: `we have new order ${JSON.stringify(res)}`,
+              };
+
+              transporter.sendMail(mailOptions, (err, res) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log('email sent');
+                }
+              });
+            }
+            db.collection('strapi').updateOne(query, update, options);
+          } catch (ex) {}
+        }
+
         // below we are now trying to add to local singleCar.json file
         await fs.writeFileSync('singleCar.json', JSON.stringify(singleCar));
       }
