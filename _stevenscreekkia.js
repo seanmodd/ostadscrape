@@ -6,7 +6,6 @@ const fs = require('fs');
 const { MongoClient } = require('mongodb');
 const assert = require('assert');
 const { exit } = require('process');
-
 const nodemailer = require('nodemailer');
 
 //
