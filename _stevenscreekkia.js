@@ -124,6 +124,31 @@ const doScrape = async (db) => {
             ? car_samplePaymentDetailsTextContent.textContent
             : 'missing payment details';
 
+          //* SCRAPE car_samplePaymentDetails_Months BELOW
+          const monthsRegex = /(\d){2}/g;
+
+          const car_samplePaymentDetails_MonthsExtract =
+            car_samplePaymentDetails.match(monthsRegex);
+          const car_samplePaymentDetails_Months =
+            car_samplePaymentDetails_MonthsExtract[0];
+
+          //* SCRAPE car_samplePaymentDetails_APR BELOW
+          const aprRegex = /([\-\+]{0,1}\d[\d\.\,]*[\.\,][\d\.\,]*\d+)/g;
+
+          const car_samplePaymentDetails_APRExtract =
+            car_samplePaymentDetails.match(aprRegex);
+          const car_samplePaymentDetails_APR =
+            car_samplePaymentDetails_APRExtract[0];
+
+          //* SCRAPE car_samplePaymentDetails_DownPayment BELOW
+
+          const downPaymentRegex = /([[\d\,]{1}[\,][\d\.\,]*\d+)/g;
+
+          const car_samplePaymentDetails_DownPaymentExtract =
+            car_samplePaymentDetails.match(downPaymentRegex);
+          const car_samplePaymentDetails_DownPayment =
+            car_samplePaymentDetails_DownPaymentExtract[0];
+
           //* SCRAPE car_exteriorColor BELOW
           const car_exteriorColorLabel =
             document.querySelector('.normalized-swatch');
@@ -173,6 +198,9 @@ const doScrape = async (db) => {
             car_exteriorColor,
             car_samplePayment,
             car_samplePaymentDetails,
+            car_samplePaymentDetails_Months,
+            car_samplePaymentDetails_APR,
+            car_samplePaymentDetails_DownPayment,
             car_carFaxUrl,
             car_imgSrcUrl0,
             car_imgSrcUrl1,
@@ -200,8 +228,8 @@ const doScrape = async (db) => {
               const mailOptions = {
                 from: 'seansmodd@gmail.com',
                 to: 'sean@senpex.com',
-                subject: `you got new order ${res.title}`,
-                text: `we have new order ${JSON.stringify(res)}`,
+                subject: `new car added: ${res.title}`,
+                text: `here is the new car: ${JSON.stringify(res)}`,
               };
 
               transporter.sendMail(mailOptions, (err, res) => {
