@@ -36,7 +36,7 @@ MongoClient.connect(url, async (err, client) => {
 const doScrape = async (db) => {
   await (async () => {
     const browser = await puppeteer.launch({
-      headless: true,
+      headless: false,
       defaultViewport: null,
     });
     const page = await browser.newPage();
@@ -90,27 +90,33 @@ const doScrape = async (db) => {
           //* SCRAPE car_name AND car_price BELOW
           const [car_name, car_price] = Array.from(
             document.querySelectorAll('.font-weight-bold span')
-          ).map((x) => x.textContent); // .map((x) => x.textContent)
+          ).map((x) => x?.textContent); // .map((x) => x.textContent)
 
           //* SCRAPE car_samplePayment BELOW
           const car_samplePayment =
             document.querySelector('#sample-payment-value strong')
-              .textContent || null;
+              ?.textContent || null;
 
           //* SCRAPE car_carFaxUrl BELOW
-          const car_carFaxUrl =
-            document.querySelector('.carfax a').href || 'missing carfax report';
+          const car_carFax = document.querySelector('.carfax a');
+          const car_carFaxUrl = car_carFax
+            ? car_carFax.href
+            : 'missing carfax report';
 
           //* SCRAPE car_samplePaymentDetails BELOW
-          const car_samplePaymentDetails =
-            document.querySelector('.payment-summary-support-text')
-              .textContent || 'missing payment details';
+          const car_samplePaymentDetailsTextContent = document.querySelector(
+            '.payment-summary-support-text'
+          );
+          const car_samplePaymentDetails = car_samplePaymentDetailsTextContent
+            ? car_samplePaymentDetailsTextContent.textContent
+            : 'missing payment details';
 
           //* SCRAPE car_exteriorColor BELOW
           const car_exteriorColorLabel =
             document.querySelector('.normalized-swatch');
           const car_exteriorColor =
-            car_exteriorColorLabel.nextSibling.textContent || null;
+            car_exteriorColorLabel?.nextSibling.textContent ||
+            'no exterior color';
 
           //* getElementByXpath function is below...
           function getElementByXpath(path) {
@@ -124,24 +130,24 @@ const doScrape = async (db) => {
           }
 
           //* SCRAPE car_vin BELOW
-          const car_vin = getElementByXpath(
-            "//li[contains(., 'VIN:')]"
-          ).textContent;
+          const car_vin =
+            getElementByXpath("//li[contains(., 'VIN:')]")?.textContent ||
+            'no vin';
 
           //* SCRAPE car_stock BELOW
-          const car_stock = getElementByXpath(
-            "//li[contains(., 'Stock:')]"
-          ).textContent;
+          const car_stock =
+            getElementByXpath("//li[contains(., 'Stock:')]")?.textContent ||
+            'no stock';
 
           //* SCRAPE car_odometer BELOW
           const car_odometer =
-            getElementByXpath("//span[contains(., ' miles')]").textContent ||
-            null;
+            getElementByXpath("//span[contains(., ' miles')]")?.textContent ||
+            'no odometer';
 
           //* SCRAPE car_views BELOW
-          const car_views = getElementByXpath(
-            "//li[contains(., ' views in the past')]"
-          ).textContent;
+          const car_views =
+            getElementByXpath("//li[contains(., ' views in the past')]")
+              ?.textContent || 'no views';
 
           return {
             car_currentCarURL,

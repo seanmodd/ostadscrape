@@ -1,18 +1,1 @@
-{
-  "car_carFaxUrl": "http://www.carfax.com/cfm/ccc_displayhistoryrpt.cfm?partner=DLR_3&vin=3KPFL4A75HE013348",
-  "car_currentCarURL": "https://www.stevenscreekkia.com/certified/Kia/2017-Kia-Forte-20cc747f0a0e09b1036c476542d71fd3.htm",
-  "car_exteriorColor": "Garnet Red",
-  "car_imgSrcUrl0": "https://pictures.dealer.com/s/stevenscreekkia/1953/f0c150112aed8675f796b9430b6c3f7bx.jpg?impolicy=resize&w=320",
-  "car_imgSrcUrl1": "https://pictures.dealer.com/s/stevenscreekkia/1892/f508ee9ce34af0e0610cc78eb9af74a5x.jpg?impolicy=resize&w=320",
-  "car_imgSrcUrl2": "https://pictures.dealer.com/s/stevenscreekkia/1130/cf8018f5493510d756fe399a2095dbecx.jpg?impolicy=resize&w=320",
-  "car_imgSrcUrl3": "https://pictures.dealer.com/s/stevenscreekkia/1711/4cb8d737e1f87e488ff45ee5da899fa5x.jpg?impolicy=resize&w=320",
-  "car_imgSrcUrl4": null,
-  "car_name": "Forte LX Sedan",
-  "car_odometer": "56,890 miles",
-  "car_price": "$15,995",
-  "car_samplePayment": "$284",
-  "car_samplePaymentDetails": "60  Months @ 6.9% A.P.R. (estimated financing rate) $1,600%  Down Payment",
-  "car_stock": " Stock: 21K0617B ",
-  "car_views": "19 views in the past 7 days",
-  "car_vin": "VIN: 3KPFL4A75HE013348 "
-}
+{"car_currentCarURL":"https://www.stevenscreekkia.com/used/Hyundai/2019-Hyundai-Ioniq+Hybrid-31f6a0ae0a0e09a9205370aea6ba514e.htm","car_name":"Ioniq Hybrid Blue Hatchback","car_price":"$21,995","car_vin":"VIN: KMHC65LC5KU124920 ","car_stock":" Stock: 22K0258A ","car_odometer":"27,304 miles","car_views":"24 views in the past 7 days","car_exteriorColor":"Symphony Air Silver","car_samplePayment":"$391","car_samplePaymentDetails":"60  Months @ 6.9% A.P.R. (estimated financing rate) $2,200%  Down Payment","car_carFaxUrl":"http://www.carfax.com/cfm/ccc_displayhistoryrpt.cfm?partner=DLR_3&vin=KMHC65LC5KU124920","car_imgSrcUrl0":"https://images.dealer.com/ddc/vehicles/2019/Hyundai/Ioniq%20Hybrid/Hatchback/trim_Blue_7d8fc2/color/Symphony%20Air%20Silver-T8S-140%2C140%2C140-640-en_US.jpg?impolicy=resize&w=1024","car_imgSrcUrl1":null,"car_imgSrcUrl2":null,"car_imgSrcUrl3":null,"car_imgSrcUrl4":null}
