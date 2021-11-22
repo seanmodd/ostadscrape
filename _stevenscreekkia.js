@@ -1,3 +1,6 @@
+// Still need to scrape all of carfax data IF it's available
+// Still need to scrape the available specials, if any for a given car!
+// Need to create a calculator for the payment calculation!
 require('dotenv').config();
 const { PythonShell } = require('python-shell');
 const puppeteer = require('puppeteer');
