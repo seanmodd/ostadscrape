@@ -45,22 +45,32 @@ const doScrape = async (db) => {
     const inventoryURLs = await page.evaluate(
       () =>
         Array.from(
-          document.querySelectorAll(
-            '.inventory-listing-sitemap .content ul li a'
+          new Set(
+            document.querySelectorAll(
+              '.inventory-listing-sitemap .content ul li a'
+            )
           )
         ).map((x) => x.href) // .map((x) => x.textContent)
       // make sure all hrefs are unique!
     );
-    await fs.writeFileSync('inventoryURLs.txt', inventoryURLs.join('\r\n'));
+    const unique = (value, index, self) => self.indexOf(value) === index;
+    const uniqueInventoryURLs = inventoryURLs.filter(unique);
+    await fs.writeFileSync(
+      'inventoryURLs.txt',
+      uniqueInventoryURLs.join('\r\n')
+    );
 
     // await page.goto(inventoryURLs);
 
     async function visitAllPages() {
-      for (let i = 0; i < inventoryURLs.length; i++) {
-        await page.goto(inventoryURLs[i]);
-        console.log('This is the inventoryURLs.length: ', inventoryURLs.length);
+      for (let i = 0; i < uniqueInventoryURLs.length; i++) {
+        await page.goto(uniqueInventoryURLs[i]);
+        console.log(
+          'This is the inventoryURLs.length: ',
+          uniqueInventoryURLs.length
+        );
         console.log('This is the i number: ', i);
-        console.log('This is the inventoryURLs[i]: ', inventoryURLs[i]);
+        console.log('This is the inventoryURLs[i]: ', uniqueInventoryURLs[i]);
         // we have to loop through the unique inventoryURLs and visit each one
 
         const singleCar = await page.evaluate(async () => {
