@@ -190,6 +190,10 @@ const doScrape = async (db) => {
             getElementByXpath("//li[contains(., ' views in the past')]")
               ?.textContent || 'no views';
 
+          // //* Scrape car_viewsPastSevenDays BELOW
+          // const car_views_Regex = /(\d){1,3}/g;
+          // const car_viewsExtract = car_views.match(car_views_Regex);
+          // const car_viewsPastSevenDays = car_viewsExtract[0];
           return {
             car_currentCarURL,
             car_name,
@@ -210,6 +214,7 @@ const doScrape = async (db) => {
             car_imgSrcUrl2,
             car_imgSrcUrl3,
             car_imgSrcUrl4,
+            // car_viewsPastSevenDays,
           };
         });
         console.log('SINGLE CAR FROM DEALERSHIP.JS', singleCar);
