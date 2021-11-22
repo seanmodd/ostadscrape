@@ -49,6 +49,7 @@ const doScrape = async (db) => {
             '.inventory-listing-sitemap .content ul li a'
           )
         ).map((x) => x.href) // .map((x) => x.textContent)
+      // make sure all hrefs are unique!
     );
     await fs.writeFileSync('inventoryURLs.txt', inventoryURLs.join('\r\n'));
 
