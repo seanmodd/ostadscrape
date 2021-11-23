@@ -1,17 +1,18 @@
 // Still need to scrape all of carfax data IF it's available
 // Still need to scrape the available specials, if any for a given car!
-// Need to create a calculator for the payment calculation!
-// Need to create a pop up calculator for the payment calculation! Dialog box?
 // Need to create a like or dislike button for each car!
-
+// Need to create a calculator for the payment calculation!
+//* Connect and add the pop up calculator for the payment calculation! Dialog box?
+//* Connect and add the "Apply for Financing" to the one on https://www.stevenscreekkia.com !!!
+// Add a table with carfax info for each car - have it set up like a FAQ at the bottom of each car
+// Add to a node server with a cron job that runs every morning
+//* Connect and add the CarFax trade-in form from here: https://www.stevenscreekkia.com/carfax-trade-in.htm?itemId=4b73c3110a0e09b1310fd4e9fe0596f9&vehicleId=4b73c3110a0e09b1310fd4e9fe0596f9
+//* Ask Jayen if this can be added to NextJS within the api folder!
+// ? This way the api can be easily accessed directly from within NextJS as well as Strapi...
 require('dotenv').config();
-const { PythonShell } = require('python-shell');
 const puppeteer = require('puppeteer');
-const path = require('path');
 const fs = require('fs');
 const { MongoClient } = require('mongodb');
-const assert = require('assert');
-const { exit } = require('process');
 const nodemailer = require('nodemailer');
 
 //
@@ -206,6 +207,9 @@ const doScrape = async (db) => {
           // const car_views_Regex = /(\d){1,3}/g;
           // const car_viewsExtract = car_views.match(car_views_Regex);
           // const car_viewsPastSevenDays = car_viewsExtract[0];
+
+          // //* Scrape car_dealership BELOW
+          const car_dealership = 'Stevens Creek Kia';
           return {
             car_currentCarURL,
             car_name,
@@ -223,6 +227,7 @@ const doScrape = async (db) => {
             car_carFaxUrl,
             car_imgSrcUrl,
             // car_viewsPastSevenDays,
+            car_dealership,
           };
         });
         console.log('SINGLE CAR FROM DEALERSHIP.JS', singleCar);
@@ -245,8 +250,26 @@ const doScrape = async (db) => {
               const mailOptions = {
                 from: 'seansmodd@gmail.com',
                 to: 'sean@senpex.com',
-                subject: `new car added: ${res.title}`,
-                text: `here is the new car: ${JSON.stringify(res)}`,
+                subject: `new car added: ${res.car_name}`,
+                text: `
+                Here is the car_currentCarURL: ${res.car_currentCarURL}.
+                Here is the car_name: ${res.car_name}.
+                Here is the car_price: ${res.car_price}.
+                Here is the car_vin: ${res.car_vin}.
+                Here is the car_stock: ${res.car_stock}.
+                Here is the car_odometer: ${res.car_odometer}.
+                Here is the car_views: ${res.car_views}.
+                Here is the car_exteriorColor: ${res.car_exteriorColor}.
+                Here is the car_samplePayment: ${res.car_samplePayment}.
+                Here is the car_samplePaymentDetails: ${res.car_samplePaymentDetails}.
+                Here is the car_samplePaymentDetails_Months: ${res.car_samplePaymentDetails_Months}.
+                Here is the car_samplePaymentDetails_APR: ${res.car_samplePaymentDetails_APR}.
+                Here is the car_samplePaymentDetails_DownPayment: ${res.car_samplePaymentDetails_DownPayment}.
+                Here is the car_carFaxUrl: ${res.car_carFaxUrl}.
+                Here is the car_imgSrcUrl: ${res.car_imgSrcUrl}.
+                Here is the car_dealership: ${res.car_dealership}.
+                `,
+                // here is the new car: ${JSON.stringify(res)}
               };
 
               transporter.sendMail(mailOptions, (err, res) => {
