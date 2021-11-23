@@ -1,6 +1,9 @@
 // Still need to scrape all of carfax data IF it's available
 // Still need to scrape the available specials, if any for a given car!
 // Need to create a calculator for the payment calculation!
+// Need to create a pop up calculator for the payment calculation! Dialog box?
+// Need to create a like or dislike button for each car!
+
 require('dotenv').config();
 const { PythonShell } = require('python-shell');
 const puppeteer = require('puppeteer');
@@ -19,6 +22,20 @@ const transporter = nodemailer.createTransport({
     user: 'seansmodd@gmail.com',
     pass: '2thepack',
   },
+});
+const mailOptions = {
+  from: 'seansmodd@gmail.com',
+  to: 'sean@senpex.com',
+  subject: `new car added: }`,
+  text: `here is the new car: `,
+};
+
+transporter.sendMail(mailOptions, (err, res) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('email sent');
+  }
 });
 
 // Connection URL
@@ -89,11 +106,6 @@ const doScrape = async (db) => {
               x.includes('/images.dealer.com/') ||
               null
           );
-          const car_imgSrcUrl0 = car_imgSrcUrl[0] || null;
-          const car_imgSrcUrl1 = car_imgSrcUrl[1] || null;
-          const car_imgSrcUrl2 = car_imgSrcUrl[2] || null;
-          const car_imgSrcUrl3 = car_imgSrcUrl[3] || null;
-          const car_imgSrcUrl4 = car_imgSrcUrl[4] || null;
 
           // const [car_imgSrcUrl] = Array.from(
           //   document.querySelectorAll('.slider img')
@@ -209,20 +221,16 @@ const doScrape = async (db) => {
             car_samplePaymentDetails_APR,
             car_samplePaymentDetails_DownPayment,
             car_carFaxUrl,
-            car_imgSrcUrl0,
-            car_imgSrcUrl1,
-            car_imgSrcUrl2,
-            car_imgSrcUrl3,
-            car_imgSrcUrl4,
+            car_imgSrcUrl,
             // car_viewsPastSevenDays,
           };
         });
         console.log('SINGLE CAR FROM DEALERSHIP.JS', singleCar);
         // now trying to add to MongoDB
-        for (const i in singleCar) {
+        {
           const res = singleCar;
           if (!res.car_vin) continue;
-          console.log(res);
+          console.log('THIS IS RES : ', res);
           const query = { car_vin: res.car_vin };
           // const query = { name: "Deli Llama" };
 
@@ -230,6 +238,7 @@ const doScrape = async (db) => {
           const options = { upsert: true };
           try {
             const item = await db.collection('strapi').findOne(query);
+            console.log('THIS IS ITEM : ', item);
             if (!item) {
               // send email here
               // ? ••••••••••••••••••••••••••••••••••••••••••••••••••••••••• Below is details of the email being sent •••••••••••••••••••••••••••••••••••••••••••••••••••••••••
