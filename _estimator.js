@@ -38,6 +38,5 @@ const helperFunctions = () => {
 
   const frame = await elementHandle.contentFrame();
 
-  
   console.log('This is the frame: ', frame);
 })();
