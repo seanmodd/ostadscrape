@@ -53,6 +53,22 @@ const framehelperFunctions = () => {
   console.log('This is the tabButtonMake: ', myTab);
   // console.log('This is the tabButtonMake: ', myTab.innerText);
 
+  const dropdownData = await frame.evaluate(() => {
+    const buttonannoying = $x('//*[@id="ymm__make-control_button"]');
+    return buttonannoying.textContent;
+  });
+  console.log('This is the dropdownData: ', dropdownData);
+
+  const carMakeName = await frame.evaluate(() => {
+    const tabButtonMake = document.querySelector('#landing__tabs-option-2');
+    tabButtonMake.click();
+    return tabButtonMake.textContent;
+  });
+  console.log('This is the carMakeName: ', carMakeName);
+
+  await page.waitForTimeout(1500);
+  console.log('NEXT: ');
+
   const textContentOfMake = await frame.evaluate(() => {
     const allNames = Array.from(
       document.querySelectorAll('.select-input_options_list_option')
