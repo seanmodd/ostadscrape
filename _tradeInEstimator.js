@@ -133,7 +133,7 @@ const doScrape = async (db) => {
 
       //* finding the element via the xpath
       const car_sampleButton =
-        getElementByXpath("//li[contains(., 'MAKE')]").textContent || 'no vin';
+        getElementByXpath("//button[contains('MAKE')]").textContent || 'no vin';
 
       console.log('mysample: ', mysample);
       return {
