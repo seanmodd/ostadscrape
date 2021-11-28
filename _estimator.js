@@ -1,5 +1,8 @@
 const puppeteer = require('puppeteer');
 
+const { getModels } = require('./_carfaxApiMake');
+const { getModelsWithYears } = require('./_carfaxApiModelandYears');
+
 const helperFunctions = () => {
   window.$x = (xPath) =>
     document.evaluate(
@@ -45,39 +48,37 @@ const framehelperFunctions = () => {
   await frame.evaluate(framehelperFunctions);
   await frame.waitForSelector('#landing__tabs-option-2');
 
+  //* Below is what clicks on the Make Button within the iFrame
   const myTab = await frame.evaluate(() => {
     const tabButtonMake = document.querySelector('#landing__tabs-option-2');
     tabButtonMake.click();
     return tabButtonMake.innerHTML;
   });
   console.log('This is the tabButtonMake: ', myTab);
-  // console.log('This is the tabButtonMake: ', myTab.innerText);
+  await page.waitForTimeout(1500);
 
+  //* Below we are gathering the text content from the Make input, not the list of cars
   const textContentOfMake = await frame.evaluate(() => {
     const allNames = Array.from(
       document.querySelectorAll('.select-input_options_list_option')
     ).map((x) => x.textContent);
-
-    // let myarray = [];
-    //     allNames.forEach(function(item) {
-    //       myarray.push(item.textContent);
-    //     });
     return allNames;
   });
-  console.log('This is the textContentOfMake: ', textContentOfMake);
-
-  const textContentOfModel = await frame.evaluate(() => {
-    document.querySelectorAll('.select-input_options_list_option');
-    const buttonannoying = $x('//*[@id="ymm__model-control_list"]/li');
-    const allNames = Array.from(buttonannoying).map((x) => x.textContent);
-
-    // let myarray = [];
-    //     allNames.forEach(function(item) {
-    //       myarray.push(item.textContent);
-    //     });
-    return allNames;
-  });
-  console.log('This is the textContentOfModel: ', textContentOfModel);
+  // console.log('This is the textContentOfMake: ', textContentOfMake);
+  //! Now we need to loop through each then create json object for model, make, and year
+  for (let i = 0; i < textContentOfMake.length; i++) {
+    const make = textContentOfMake[i];
+    const model = await getModels(textContentOfMake[i]);
+    // console.log('This is the make 📭📭📭📭📭📭📭📭📭📭: ', make);
+    // console.log('This is the models 📳📳📳📳📳📳📳: ', model);
+    const modelsWithYears = await getModelsWithYears(make, model[i]);
+    // console.log(
+    //   'This is the modelsWithYears 🤼‍♂️🤼‍♂️🤼‍♂️🤼‍♂️🤼‍♂️🤼‍♂️🤼‍♂️: ',
+    //   modelsWithYears
+    // );
+  }
 
   await page.waitForTimeout(2500);
 })();
+
+//

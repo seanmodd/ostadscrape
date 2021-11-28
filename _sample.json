@@ -1,0 +1,5 @@
+{
+  "operationName": null,
+  "variables": {},
+  "query": "{\\n  getMakeModels(make: \\"Alfa Romeo\\") {\\n    make\\n    model\\n    uisModelUrlName\\n    __typename\\n  }\\n}\\n"
+}
