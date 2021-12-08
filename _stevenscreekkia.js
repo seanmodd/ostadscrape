@@ -119,12 +119,12 @@ const doScrape = async (db) => {
           //* SCRAPE car_name AND car_price BELOW
           const [car_name, car_price] = Array.from(
             document.querySelectorAll('.font-weight-bold span')
-          ).map((x) => x?.textContent); // .map((x) => x.textContent)
+          ).map((x) => x.textContent); // .map((x) => x.textContent)
 
           //* SCRAPE car_samplePayment BELOW
           const car_samplePayment =
             document.querySelector('#sample-payment-value strong')
-              ?.textContent || null;
+              .textContent || null;
 
           //* SCRAPE car_carFaxUrl BELOW
           const car_carFax = document.querySelector('.carfax a');
@@ -169,7 +169,7 @@ const doScrape = async (db) => {
           const car_exteriorColorLabel =
             document.querySelector('.normalized-swatch');
           const car_exteriorColor =
-            car_exteriorColorLabel?.nextSibling.textContent ||
+            car_exteriorColorLabel.nextSibling.textContent ||
             'no exterior color';
 
           //* getElementByXpath function is below...
@@ -185,23 +185,23 @@ const doScrape = async (db) => {
 
           //* SCRAPE car_vin BELOW
           const car_vin =
-            getElementByXpath("//li[contains(., 'VIN:')]")?.textContent ||
+            getElementByXpath("//li[contains(., 'VIN:')]").textContent ||
             'no vin';
 
           //* SCRAPE car_stock BELOW
           const car_stock =
-            getElementByXpath("//li[contains(., 'Stock:')]")?.textContent ||
+            getElementByXpath("//li[contains(., 'Stock:')]").textContent ||
             'no stock';
 
           //* SCRAPE car_odometer BELOW
           const car_odometer =
-            getElementByXpath("//span[contains(., ' miles')]")?.textContent ||
+            getElementByXpath("//span[contains(., ' miles')]").textContent ||
             'no odometer';
 
           //* SCRAPE car_views BELOW
           const car_views =
             getElementByXpath("//li[contains(., ' views in the past')]")
-              ?.textContent || 'no views';
+              .textContent || 'no views';
 
           // //* Scrape car_viewsPastSevenDays BELOW
           // const car_views_Regex = /(\d){1,3}/g;
